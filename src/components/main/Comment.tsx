@@ -98,7 +98,7 @@ export default function Comment({ product }: { product: Product }) {
           {isUploading ? "업로드중..." : "등록"}
         </button>
         <input
-          className=" border-b-2 border-0 h-[30px] outline-none"
+          className=" border-b-2 border-0 h-[30px] outline-none w-full max-w-[450px] break-words"
           type="text"
           placeholder="리뷰를 작성해주세요."
           name="text"

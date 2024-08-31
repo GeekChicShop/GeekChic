@@ -66,9 +66,9 @@ export default function CommentBtn({ comments }: CommentBtnProps) {
           className="border-b-2 border-0 h-[40px] w-[500px] m-auto text-left mt-[25px] text-lg p-0 pb-2"
         />
       ) : (
-        <p className="border-b-2 border-0 h-[40px] w-[500px] m-auto text-left mt-[25px] text-lg">
-          {comments.text}
-        </p>
+        <div className="border-b-2 border-0 w-[500px] m-auto text-left mt-[25px] text-lg">
+          <p className="max-w-[400px] break-words">{comments.text}</p>
+        </div>
       )}
 
       <div className="flex justify-end -mt-[55px] mr-[30px]">
