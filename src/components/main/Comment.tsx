@@ -1,4 +1,10 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, {
+  useState,
+  ChangeEvent,
+  FormEvent,
+  useRef,
+  useEffect,
+} from "react";
 import { useRecoilValue } from "recoil";
 
 import { userState } from "../../atoms/userAtom";
@@ -11,8 +17,10 @@ import FilledStar from "../../assets/icons/FilledStar.svg";
 
 export default function Comment({ product }: { product: Product }) {
   const user = useRecoilValue(userState);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const id = product.id;
 
+  const [text, setText] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [comment, setComment] = useState<Omit<Comment, "id" | "createdAt">>({
@@ -22,6 +30,14 @@ export default function Comment({ product }: { product: Product }) {
     userPhoto: "",
     displayName: "",
   });
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      // textarea의 높이를 초기화한 다음, 내용에 맞게 높이를 조정
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [text]); // text 상태가 변경될 때마다 useEffect 실행
 
   const { addComment } = useComment(id);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -62,6 +78,7 @@ export default function Comment({ product }: { product: Product }) {
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    setText(value);
     setComment((comment) => ({ ...comment, [name]: value }));
   };
 
@@ -99,6 +116,7 @@ export default function Comment({ product }: { product: Product }) {
         </button>
         <div className="border-b-2 border-0 w-[500px] text-left">
           <textarea
+            ref={textareaRef}
             className="w-full max-w-[430px] pl-2 outline-none resize-none"
             placeholder="리뷰를 작성해주세요."
             name="text"
