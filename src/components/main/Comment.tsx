@@ -60,7 +60,7 @@ export default function Comment({ product }: { product: Product }) {
     setIsUploading(false);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setComment((comment) => ({ ...comment, [name]: value }));
   };
@@ -97,15 +97,17 @@ export default function Comment({ product }: { product: Product }) {
         >
           {isUploading ? "업로드중..." : "등록"}
         </button>
-        <input
-          className=" border-b-2 border-0 h-[30px] outline-none w-full max-w-[450px] break-words"
-          type="text"
-          placeholder="리뷰를 작성해주세요."
-          name="text"
-          value={comment.text ?? ""}
-          required
-          onChange={handleChange}
-        />
+        <div className="border-b-2 border-0 w-[500px] text-left">
+          <textarea
+            className="w-full max-w-[430px] pl-2 outline-none resize-none"
+            placeholder="리뷰를 작성해주세요."
+            name="text"
+            value={comment.text ?? ""}
+            required
+            onChange={handleChange}
+            rows={1}
+          />
+        </div>
       </form>
     </>
   );

@@ -1,51 +1,23 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 
+import useComment from "../../hook/useComment";
 import { geekChickUser } from "../../atoms/userAtom";
-import { removeComment } from "../../api/firebase";
-import { editComments } from "../../api/firebase";
 
 import { Comment } from "../../types/mainType";
 
 interface CommentBtnProps {
-  comments: Comment; // Comment 타입으로 정의
-}
-
-interface CommentObj {
-  id: string;
-  commentId: string;
+  comments: Comment;
 }
 
 export default function CommentBtn({ comments }: CommentBtnProps) {
   const { id } = useParams<{ id?: string }>();
   const loginUser = useRecoilValue(geekChickUser);
-  const queryClient = useQueryClient();
-
   const [isCommentEdit, setIsCommentEdit] = useState(false);
   const [editComment, setEditComment] = useState(comments.text);
 
-  const removeCommentItem = useMutation<void, Error, CommentObj>({
-    mutationFn: async ({ id, commentId }) => await removeComment(id, commentId),
-
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["comments"],
-      });
-    },
-  });
-
-  const editCommentItem = useMutation<void, Error, Comment>({
-    mutationFn: async (comments) => await editComments(id as string, comments),
-
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["comments"],
-      });
-    },
-  });
-
+  const { editCommentItem, removeCommentItem } = useComment(id as string);
   const onClickEditUsedComment = async () => {
     const editCommentData = {
       ...comments,
@@ -64,17 +36,18 @@ export default function CommentBtn({ comments }: CommentBtnProps) {
   return (
     <>
       {isCommentEdit ? (
-        <input
-          type="text"
-          defaultValue={comments.text}
-          onChange={(e) => {
-            setEditComment(e.target.value);
-          }}
-          className="border-b-2 border-0 h-[40px] w-[500px] m-auto text-left mt-[25px] text-lg p-0 pb-2"
-        />
+        <div className="border-b-2 border-0 w-[500px] mt-[25px] m-auto text-left">
+          <textarea
+            defaultValue={comments.text}
+            onChange={(e) => {
+              setEditComment(e.target.value);
+            }}
+            className="w-full max-w-[400px] border-0 text-lg pb-10 resize-none"
+          />
+        </div>
       ) : (
         <div className="border-b-2 border-0 w-[500px] m-auto text-left mt-[25px] text-lg">
-          <p className="max-w-[400px] break-words">{comments.text}</p>
+          <p className="max-w-[400px] pb-2">{comments.text}</p>
         </div>
       )}
       {loginUser.userId === comments.uid && (
