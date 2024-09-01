@@ -13,6 +13,10 @@ export interface PayProduct extends Product {
   quantity: number;
 }
 
+export interface ProductComments extends Product {
+  comments: Comment[];
+}
+
 export interface AddProduct {
   id: string;
   title: string;
