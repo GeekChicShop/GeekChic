@@ -11,10 +11,11 @@ import {
 import Comment from "../components/main/Comment";
 import CommentCard from "../components/main/CommentCard";
 import { userState, wishlistState } from "../atoms/userAtom";
-import { Product } from "../types/mainType";
+import { ProductComments } from "../types/mainType";
 
 import HeartIcon from "../assets/icons/heart.svg";
 import HeartFullIcon from "../assets/icons/heart_full.svg";
+import Chevron_left from "../assets/icons/chevron_left.svg";
 
 export default function ProductsDtail() {
   const location = useLocation();
@@ -23,7 +24,7 @@ export default function ProductsDtail() {
   const wishlist = useRecoilValue(wishlistState);
   const setWishlist = useSetRecoilState(wishlistState);
 
-  const { product } = location.state as { product: Product };
+  const { product } = location.state as { product: ProductComments };
   const { description, image, price, options } = product;
 
   const [selected, setSelected] = useState<string>(options && options[0]);
@@ -32,6 +33,10 @@ export default function ProductsDtail() {
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   const handleClickPayment = async () => {
@@ -43,6 +48,7 @@ export default function ProductsDtail() {
   const handleClickCarts = async () => {
     const selectedProduct = { ...product, options: selected, quantity: 1 };
     addOrUpdateToCart(id as string, selectedProduct);
+    alert(`장바구니에 추가가 되었습니다!`);
   };
 
   const handleWishlist = async () => {
@@ -63,6 +69,12 @@ export default function ProductsDtail() {
 
   return (
     <div className="container w-[600px]">
+      <img
+        src={Chevron_left}
+        alt="이전 페이지로"
+        className="w-10 h-10 cursor-pointer "
+        onClick={handleBack}
+      />
       <img className="w-[598px] h-[550px]" src={image} alt={description} />
       <div className="flex m-[30px] gap-[20px]">
         <div className="w-[100px] h-[100px] bg-[#BEBEBE]"></div>

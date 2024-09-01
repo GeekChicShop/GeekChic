@@ -1,18 +1,30 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, {
+  useState,
+  ChangeEvent,
+  FormEvent,
+  useRef,
+  useEffect,
+} from "react";
 import { useRecoilValue } from "recoil";
 
-import { userState } from "../../atoms/userAtom";
-import { Product } from "../../types/mainType";
-import type { Comment } from "../../types/mainType";
 import useComment from "../../hook/useComment";
+import { userState } from "../../atoms/userAtom";
+import type { Comment, ProductComments } from "../../types/mainType";
 
 import EmptyStar from "../../assets/icons/EmptyStar.svg";
 import FilledStar from "../../assets/icons/FilledStar.svg";
 
-export default function Comment({ product }: { product: Product }) {
+export default function Comment({ product }: { product: ProductComments }) {
   const user = useRecoilValue(userState);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const id = product.id;
+  const commentArray = Object.values(product.comments);
+  const averageRank = commentArray.length
+    ? commentArray.reduce((acc, comment) => acc + (comment.rank ?? 0), 0) /
+      commentArray.length
+    : 0;
 
+  const [text, setText] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const [comment, setComment] = useState<Omit<Comment, "id" | "createdAt">>({
@@ -22,6 +34,14 @@ export default function Comment({ product }: { product: Product }) {
     userPhoto: "",
     displayName: "",
   });
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      // textarea의 높이를 초기화한 다음, 내용에 맞게 높이를 조정
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [text]);
 
   const { addComment } = useComment(id);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -60,8 +80,9 @@ export default function Comment({ product }: { product: Product }) {
     setIsUploading(false);
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    setText(value);
     setComment((comment) => ({ ...comment, [name]: value }));
   };
 
@@ -72,9 +93,13 @@ export default function Comment({ product }: { product: Product }) {
   return (
     <>
       {success && <p className="my-2">✅ {success}</p>}
-      <h1 className="text-3xl font-bold text-left ml-[25px] mt-[50px]">
-        상품 후기
-      </h1>
+      <div className="flex ml-[25px] mt-[50px] text-3xl font-bold text-left gap-1">
+        <h1>상품 후기</h1>
+        <p className="text-[#BEBEBE]">({commentArray.length})</p>
+      </div>
+      <div className="text-2xl text-right mr-[50px]">
+        <p>{`리뷰 평점: ${averageRank}`}</p>
+      </div>
       <form
         className="flex flex-col px-12 gap-1 mt-[25px]"
         onSubmit={handleSubmit}
@@ -97,15 +122,18 @@ export default function Comment({ product }: { product: Product }) {
         >
           {isUploading ? "업로드중..." : "등록"}
         </button>
-        <input
-          className=" border-b-2 border-0 h-[30px] outline-none"
-          type="text"
-          placeholder="리뷰를 작성해주세요."
-          name="text"
-          value={comment.text ?? ""}
-          required
-          onChange={handleChange}
-        />
+        <div className="border-b-2 border-0 w-[500px] text-left">
+          <textarea
+            ref={textareaRef}
+            className="w-full max-w-[430px] pl-2 outline-none resize-none"
+            placeholder="리뷰를 작성해주세요."
+            name="text"
+            value={comment.text ?? ""}
+            required
+            onChange={handleChange}
+            rows={1}
+          />
+        </div>
       </form>
     </>
   );

@@ -30,13 +30,11 @@ export default function CommentCard() {
                 alt={comment.displayName}
                 className="w-[60px] h-[60px] object-cover rounded-full border"
               />
-              <div className="mt-[5px] ml-[15px]">
-                <h3 className="text-left text-lg font-bold">
-                  {comment.displayName}
-                </h3>
+              <div className="flex-grow mt-[5px] ml-[15px] text-left">
+                <h3 className="text-lg font-bold">{comment.displayName}</h3>
                 <p className="text-sm">{formatDate(comment.createdAt)}</p>
               </div>
-              <div className="flex mt-[10px] ml-[250px]">
+              <div className="flex mt-[10px] mr-[50px]">
                 {Array.from({ length: 5 }).map((_, index) => (
                   <img
                     key={index}
