@@ -11,7 +11,7 @@ import {
 import Comment from "../components/main/Comment";
 import CommentCard from "../components/main/CommentCard";
 import { userState, wishlistState } from "../atoms/userAtom";
-import { Product } from "../types/mainType";
+import { ProductComments } from "../types/mainType";
 
 import HeartIcon from "../assets/icons/heart.svg";
 import HeartFullIcon from "../assets/icons/heart_full.svg";
@@ -24,7 +24,7 @@ export default function ProductsDtail() {
   const wishlist = useRecoilValue(wishlistState);
   const setWishlist = useSetRecoilState(wishlistState);
 
-  const { product } = location.state as { product: Product };
+  const { product } = location.state as { product: ProductComments };
   const { description, image, price, options } = product;
 
   const [selected, setSelected] = useState<string>(options && options[0]);

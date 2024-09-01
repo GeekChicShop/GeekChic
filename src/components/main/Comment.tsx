@@ -7,18 +7,22 @@ import React, {
 } from "react";
 import { useRecoilValue } from "recoil";
 
-import { userState } from "../../atoms/userAtom";
-import { Product } from "../../types/mainType";
-import type { Comment } from "../../types/mainType";
 import useComment from "../../hook/useComment";
+import { userState } from "../../atoms/userAtom";
+import type { Comment, ProductComments } from "../../types/mainType";
 
 import EmptyStar from "../../assets/icons/EmptyStar.svg";
 import FilledStar from "../../assets/icons/FilledStar.svg";
 
-export default function Comment({ product }: { product: Product }) {
+export default function Comment({ product }: { product: ProductComments }) {
   const user = useRecoilValue(userState);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const id = product.id;
+  const commentArray = Object.values(product.comments);
+  const averageRank = commentArray.length
+    ? commentArray.reduce((acc, comment) => acc + (comment.rank ?? 0), 0) /
+      commentArray.length
+    : 0;
 
   const [text, setText] = useState("");
   const [isUploading, setIsUploading] = useState(false);
@@ -37,7 +41,7 @@ export default function Comment({ product }: { product: Product }) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [text]); // text 상태가 변경될 때마다 useEffect 실행
+  }, [text]);
 
   const { addComment } = useComment(id);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -89,9 +93,13 @@ export default function Comment({ product }: { product: Product }) {
   return (
     <>
       {success && <p className="my-2">✅ {success}</p>}
-      <h1 className="text-3xl font-bold text-left ml-[25px] mt-[50px]">
-        상품 후기
-      </h1>
+      <div className="flex ml-[25px] mt-[50px] text-3xl font-bold text-left gap-1">
+        <h1>상품 후기</h1>
+        <p className="text-[#BEBEBE]">({commentArray.length})</p>
+      </div>
+      <div className="text-2xl text-right mr-[50px]">
+        <p>{`리뷰 평점: ${averageRank}`}</p>
+      </div>
       <form
         className="flex flex-col px-12 gap-1 mt-[25px]"
         onSubmit={handleSubmit}
