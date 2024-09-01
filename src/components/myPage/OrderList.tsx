@@ -16,9 +16,9 @@ const OrderList = ({ orders }: OrdersProps) => {
 
   return (
     <div className="p-10 text-left">
-      <div className="text-m text-gray-600 mb-4 pb-4 border-b">
-        <span className="font-bold">전체 </span>
-        {ordersArr.length}
+      <div className="flex gap-1 text-m mb-4 pb-4 border-b">
+        <span className="font-bold">전체</span>
+        <p className="text-[#a9a9a9]">{ordersArr.length}</p>
       </div>
 
       {ordersArr.length == 0 && (

@@ -41,7 +41,7 @@ export default function Wishlist() {
         <>
           <div className="flex text-lg gap-1 text-left px-11 mb-[10px]">
             <p>전체</p>
-            <p>{wishlist.length}</p>
+            <p className="text-[#a9a9a9]">{wishlist.length}</p>
           </div>
           <ul className="px-11 py-2 pb-4">
             {wishlist.map((product: Product) => (

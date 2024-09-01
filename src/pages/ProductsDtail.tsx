@@ -36,7 +36,7 @@ export default function ProductsDtail() {
   };
 
   const handleBack = () => {
-    navigate(-1); //뒤로가기
+    navigate(-1);
   };
 
   const handleClickPayment = async () => {
@@ -48,6 +48,7 @@ export default function ProductsDtail() {
   const handleClickCarts = async () => {
     const selectedProduct = { ...product, options: selected, quantity: 1 };
     addOrUpdateToCart(id as string, selectedProduct);
+    alert(`장바구니에 추가가 되었습니다!`);
   };
 
   const handleWishlist = async () => {
