@@ -6,6 +6,7 @@ import { userState } from "../../atoms/userAtom";
 import CartItem from "./CartItem";
 import PriceCard from "./PriceCard";
 import useCart from "../../hook/useCart";
+import Button from "../ui/button";
 
 import TotalPlusIcon from "../../assets/icons/totalPlus.svg";
 import EqualsIcon from "../../assets/icons/totalEquals.svg";
@@ -41,7 +42,7 @@ export default function MyCart() {
       </div>
       <div className="flex text-lg gap-1 text-left px-11 mb-[10px]">
         <p className="font-bold mr-[5px]">전체</p>
-        <p className="text-[#BEBEBE]">{carts?.length}</p>
+        <p className="text-lightgray">{carts?.length}</p>
       </div>
       <p className="border border-[#D9D9D9] w-[520px] m-auto mt-[20px] mb-[30px]"></p>
       <ul className="px-11 py-2 pb-4">
@@ -58,12 +59,11 @@ export default function MyCart() {
         <img src={EqualsIcon} alt="EqualsIcon" />
         <PriceCard text="총가격" price={totalPrice + SHIPPING} />
       </div>
-      <button
-        className="w-[520px] mb-[100px] mt-[10px] py-3 bg-[#8F5BBD] text-[#fff] border border-[#8F5BBD] rounded-md hover:bg-[#fff] hover:text-[#8F5BBD] duration-200"
+      <Button
+        text="주문하기"
+        className="w-[520px] mb-[100px] mt-[10px] bg-puple text-white border border-puple hover:bg-white hover:text-puple"
         onClick={handleClickPayment}
-      >
-        주문하기
-      </button>
+      />
     </div>
   );
 }
