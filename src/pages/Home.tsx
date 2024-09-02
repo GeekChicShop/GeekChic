@@ -8,6 +8,7 @@ import useProduct from "../hook/useProduct";
 import Header from "../components/common/Header";
 import SearchHeader from "../components/common/SearchHeader";
 import ProductCard from "../components/main/ProductCard";
+import Button from "../components/ui/button";
 
 import { UserDataType } from "../types/usedType";
 
@@ -89,9 +90,11 @@ export default function Home() {
               <div className="text-lg font-bold text-left">최근 등록 상품</div>
               {user && user.isAdmin && (
                 <Link to="products/new">
-                  <button className="py-2 px-7 bg-[#8F5BBD] text-[#fff] border border-[#8F5BBD] rounded-md hover:bg-[#fff] hover:text-[#8F5BBD] duration-200">
-                    상품 등록
-                  </button>
+                  <Button
+                    text="상품 등록"
+                    padding="py-2"
+                    className="px-7 border bg-puple text-white border-puple hover:bg-white hover:text-puple"
+                  />
                 </Link>
               )}
             </div>
@@ -111,9 +114,12 @@ export default function Home() {
             <div className="text-2xl mt-[130px] mb-[40px]">
               검색하신 상품이 없어요.
             </div>
-            <button className="w-[220px] py-2 bg-[#fff] text-[#8F5BBD] border border-[#8F5BBD] rounded-md hover:bg-[#8F5BBD] hover:text-[#fff] duration-200">
-              상품으로 바로가기
-            </button>
+            <Link to="/products">
+              <Button
+                text="상품으로 바로가기"
+                className="w-[220px] bg-white text-puple border border-puple hover:bg-puple hover:text-white"
+              />
+            </Link>
           </div>
         )}
       </div>

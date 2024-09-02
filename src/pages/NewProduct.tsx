@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { uploadImage } from "../api/uploader";
 import useProduct from "../hook/useProduct";
 import { AddProduct } from "../types/mainType";
+import Button from "../components/ui/button";
 
 export default function NewProduct() {
   const [product, setProduct] = useState<Partial<AddProduct>>({});
@@ -100,12 +101,11 @@ export default function NewProduct() {
           required
           onChange={handleChange}
         />
-        <button
-          className="mb-[100px] mt-[10px] py-3 bg-[#8F5BBD] text-[#fff] border border-[#8F5BBD] rounded-md hover:bg-[#fff] hover:text-[#8F5BBD] duration-200"
-          disabled={isUploading}
-        >
-          {isUploading ? "uploading..." : "제품 등록하기"}
-        </button>
+        <Button
+          text="제품 등록하기"
+          isLoading={isUploading}
+          className="mb-[100px] mt-[10px] bg-puple text-white border border-puple hover:bg-white hover:text-puple"
+        />
       </form>
     </section>
   );

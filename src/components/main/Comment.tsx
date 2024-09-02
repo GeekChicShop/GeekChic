@@ -95,7 +95,7 @@ export default function Comment({ product }: { product: ProductComments }) {
       {success && <p className="my-2">✅ {success}</p>}
       <div className="flex ml-[25px] mt-[50px] text-3xl font-bold text-left gap-1">
         <h1>상품 후기</h1>
-        <p className="text-[#BEBEBE]">({commentArray.length})</p>
+        <p className="text-lightgray">({commentArray.length})</p>
       </div>
       <div className="text-2xl text-right mr-[50px]">
         <p>{`리뷰 평점: ${averageRank}`}</p>
@@ -115,9 +115,8 @@ export default function Comment({ product }: { product: ProductComments }) {
             />
           ))}
         </div>
-
         <button
-          className="w-[70px] h-[40px] ml-[430px] -mb-[30px] z-0 bg-[#000] text-[#fff] border border-[#000] rounded-full hover:bg-[#fff] hover:text-[#000] duration-200"
+          className="w-[70px] h-[40px] ml-[430px] -mb-[30px] z-0 bg-black text-white border border-black rounded-full hover:bg-white hover:text-black duration-200"
           disabled={isUploading}
         >
           {isUploading ? "업로드중..." : "등록"}

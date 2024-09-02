@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import useComment from "../../hook/useComment";
 import { geekChickUser } from "../../atoms/userAtom";
+import Button from "../ui/button";
 
 import { Comment } from "../../types/mainType";
 
@@ -54,33 +55,29 @@ export default function CommentBtn({ comments }: CommentBtnProps) {
         <div className="flex justify-end -mt-[55px] mr-[30px]">
           {isCommentEdit ? (
             <>
-              <button
+              <Button
+                text="저장"
                 onClick={onClickEditUsedComment}
-                className="w-[40px] h-[40px] ml-2 mb-2 bg-gray-200 rounded-md"
-              >
-                저장
-              </button>
-              <button
+                className="w-[40px] h-[40px] ml-2 mb-2 bg-gray-200"
+              />
+              <Button
+                text="취소"
                 onClick={() => setIsCommentEdit(false)}
-                className="w-[40px] h-[40px] mr-5 ml-2 mb-2 bg-gray-200 rounded-md"
-              >
-                취소
-              </button>
+                className="w-[40px] h-[40px] ml-2 mb-2 bg-gray-200 mr-[20px]"
+              />
             </>
           ) : (
             <>
-              <button
+              <Button
+                text="수정"
                 onClick={() => setIsCommentEdit(true)}
-                className="w-[40px] h-[40px] ml-2 mb-2 bg-gray-200 rounded-md"
-              >
-                수정
-              </button>
-              <button
+                className="w-[40px] h-[40px] ml-2 mb-2 bg-gray-200"
+              />
+              <Button
+                text="삭제"
                 onClick={() => onClickRemoveComment(comments.id)}
-                className="w-[40px] h-[40px] mr-5 ml-2 mb-2 bg-gray-200 rounded-md"
-              >
-                삭제
-              </button>
+                className="w-[40px] h-[40px] ml-2 mb-2 bg-gray-200"
+              />
             </>
           )}
         </div>

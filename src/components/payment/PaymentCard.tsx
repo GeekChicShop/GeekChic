@@ -13,7 +13,7 @@ export default function PaymentCard({ product }: { product: PayProduct }) {
       <div className="text-left px-4 w-[380px]">
         <p className="text-lg font-bold mb-[5px]">{product.title}</p>
         <p>{product.description}</p>
-        <p className="text-[#959595]">
+        <p className="text-sizegray">
           {product.options} | {product.quantity}개
         </p>
         <p className="mt-[40px] text-right text-lg text-nowrap">{price}원</p>
