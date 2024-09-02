@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { wishlistState, userState } from "../atoms/userAtom";
 import { getWishlistItems, setWishlistItems } from "../api/firebase";
 import { Product } from "../types/mainType";
+import Button from "../components/ui/button";
 
 import closedIcon from "../assets/icons/close.svg";
 
@@ -87,9 +88,10 @@ export default function Wishlist() {
           <div className="text-2xl mt-[130px] mb-[40px]">
             관심있는 상품을 저장해보세요.
           </div>
-          <button className="w-[220px] py-2 bg-[#fff] text-[#8F5BBD] border border-[#8F5BBD] rounded-md hover:bg-[#8F5BBD] hover:text-[#fff] duration-200">
-            상품으로 바로가기
-          </button>
+          <Button
+            text="상품으로 바로가기"
+            className="w-[220px] border bg-white text-puple border-puple hover:bg-puple hover:text-white"
+          />
         </div>
       )}
     </div>

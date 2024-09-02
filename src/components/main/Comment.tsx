@@ -115,9 +115,8 @@ export default function Comment({ product }: { product: ProductComments }) {
             />
           ))}
         </div>
-
         <button
-          className="w-[70px] h-[40px] ml-[430px] -mb-[30px] z-0 bg-[#000] text-[#fff] border border-[#000] rounded-full hover:bg-[#fff] hover:text-[#000] duration-200"
+          className="w-[70px] h-[40px] ml-[430px] -mb-[30px] z-0 bg-black text-white border border-black rounded-full hover:bg-white hover:text-black duration-200"
           disabled={isUploading}
         >
           {isUploading ? "업로드중..." : "등록"}

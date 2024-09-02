@@ -4,6 +4,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { addOrderList, removeFromCart } from "../api/firebase";
 import PaymentCard from "../components/payment/PaymentCard";
 import { PayProduct, OrderDetails } from "../types/mainType";
+import Button from "../components/ui/button";
 
 export default function Payment() {
   const { id } = useParams<string>();
@@ -140,12 +141,11 @@ export default function Payment() {
               <option value={"pay"}>페이결제</option>
             </select>
           </div>
-          <button
+          <Button
+            text="결제하기"
             type="submit"
-            className="w-[550px] py-3 bg-[#8F5BBD] text-[#fff] border border-[#8F5BBD] rounded-md hover:bg-[#fff] hover:text-[#8F5BBD] duration-200"
-          >
-            결제하기
-          </button>
+            className="w-[550px] py-3 border bg-puple text-white border-puple hover:bg-white hover:text-puple"
+          />
         </form>
       </div>
     </div>
