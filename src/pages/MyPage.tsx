@@ -51,7 +51,12 @@ const MyPage = () => {
     );
   }
   if (!user) {
-    return <div>유저 정보를 불러올 수 없습니다.</div>;
+    return (
+      <div>
+        <p>유저 정보를 불러올 수 없습니다.</p>
+        <Link to={"/api/login"}>로그인 페이지로 이동해주세요</Link>
+      </div>
+    );
   }
   return (
     <Layout title="마이페이지">
