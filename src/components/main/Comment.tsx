@@ -95,7 +95,7 @@ export default function Comment({ product }: { product: ProductComments }) {
       {success && <p className="my-2">✅ {success}</p>}
       <div className="flex ml-[25px] mt-[50px] text-3xl font-bold text-left gap-1">
         <h1>상품 후기</h1>
-        <p className="text-[#BEBEBE]">({commentArray.length})</p>
+        <p className="text-lightgray">({commentArray.length})</p>
       </div>
       <div className="text-2xl text-right mr-[50px]">
         <p>{`리뷰 평점: ${averageRank}`}</p>

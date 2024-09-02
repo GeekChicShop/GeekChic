@@ -9,6 +9,7 @@ export default {
         black: "#000",
         white: "#fff",
         lightgray: "#BEBEBE",
+        sizegray: "#959595",
       },
     },
   },

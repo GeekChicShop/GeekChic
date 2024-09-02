@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 import Header from "../components/common/Header";
 import SearchHeader from "../components/common/SearchHeader";
@@ -7,6 +8,7 @@ import ProductCard from "../components/main/ProductCard";
 import { getProducts } from "../api/firebase";
 
 import { Product } from "../types/mainType";
+import Button from "../components/ui/button";
 
 interface Filter {
   text: string;
@@ -83,9 +85,13 @@ export default function Products() {
             <div className="text-2xl mt-[130px] mb-[40px]">
               검색하신 상품이 없어요.
             </div>
-            <button className="w-[220px] py-2 bg-[#fff] text-[#8F5BBD] border border-[#8F5BBD] rounded-md hover:bg-[#8F5BBD] hover:text-[#fff] duration-200">
-              상품으로 바로가기
-            </button>
+
+            <Link to="/products">
+              <Button
+                text="상품으로 바로가기"
+                className="w-[220px] bg-white text-puple border border-puple hover:bg-puple hover:text-white"
+              />
+            </Link>
           </div>
         )}
       </div>

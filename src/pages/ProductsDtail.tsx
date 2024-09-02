@@ -78,8 +78,8 @@ export default function ProductsDtail() {
       />
       <img className="w-[598px] h-[550px]" src={image} alt={description} />
       <div className="flex m-[30px] gap-[20px]">
-        <div className="w-[100px] h-[100px] bg-[#BEBEBE]"></div>
-        <div className="w-[100px] h-[100px] bg-[#BEBEBE]"></div>
+        <div className="w-[100px] h-[100px] bg-lightgray"></div>
+        <div className="w-[100px] h-[100px] bg-lightgray"></div>
       </div>
       <div className="flex gap-[460px] text-lg text-left ml-[30px] mt-[25px]">
         <p className="">구매가</p>

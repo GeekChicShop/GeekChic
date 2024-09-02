@@ -42,7 +42,7 @@ export default function MyCart() {
       </div>
       <div className="flex text-lg gap-1 text-left px-11 mb-[10px]">
         <p className="font-bold mr-[5px]">전체</p>
-        <p className="text-[#BEBEBE]">{carts?.length}</p>
+        <p className="text-lightgray">{carts?.length}</p>
       </div>
       <p className="border border-[#D9D9D9] w-[520px] m-auto mt-[20px] mb-[30px]"></p>
       <ul className="px-11 py-2 pb-4">
