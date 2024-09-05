@@ -8,7 +8,7 @@ import ProductCard from "../components/main/ProductCard";
 import { getProducts } from "../api/firebase";
 
 import { Product } from "../types/mainType";
-import Button from "../components/ui/button";
+import Button from "../components/ui/Button";
 
 interface Filter {
   text: string;

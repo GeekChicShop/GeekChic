@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 
 import useComment from "../../hook/useComment";
 import { geekChickUser } from "../../atoms/userAtom";
-import Button from "../ui/button";
+import Button from "../ui/Button";
 
 import { Comment } from "../../types/mainType";
 

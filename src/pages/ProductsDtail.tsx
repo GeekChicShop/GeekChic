@@ -12,7 +12,7 @@ import Comment from "../components/main/Comment";
 import CommentCard from "../components/main/CommentCard";
 import { userState, wishlistState } from "../atoms/userAtom";
 import { ProductComments } from "../types/mainType";
-import Button from "../components/ui/button";
+import Button from "../components/ui/Button";
 
 import HeartIcon from "../assets/icons/heart.svg";
 import HeartFullIcon from "../assets/icons/heart_full.svg";
