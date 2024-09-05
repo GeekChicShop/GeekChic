@@ -8,7 +8,7 @@ import useProduct from "../hook/useProduct";
 import Header from "../components/common/Header";
 import SearchHeader from "../components/common/SearchHeader";
 import ProductCard from "../components/main/ProductCard";
-import Button from "../components/ui/button";
+import Button from "../components/ui/Button";
 
 import { UserDataType } from "../types/usedType";
 

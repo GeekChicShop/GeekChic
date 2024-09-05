@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { wishlistState, userState } from "../atoms/userAtom";
 import { getWishlistItems, setWishlistItems } from "../api/firebase";
 import { Product } from "../types/mainType";
-import Button from "../components/ui/button";
+import Button from "../components/ui/Button";
 
 import closedIcon from "../assets/icons/close.svg";
 
