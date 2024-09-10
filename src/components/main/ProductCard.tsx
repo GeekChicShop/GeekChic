@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
       }}
       className="border rounded-md truncate cursor-pointer"
     >
-      <img className="w-[120px] h-[130px] " src={image} alt="img" />
+      <img className="w-[120px] h-[130px]" src={image} alt="img" />
     </li>
   );
 }

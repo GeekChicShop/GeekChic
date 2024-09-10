@@ -9,6 +9,7 @@ import Header from "../components/common/Header";
 import SearchHeader from "../components/common/SearchHeader";
 import ProductCard from "../components/main/ProductCard";
 import Button from "../components/ui/Button";
+import HomeSkeleton from "../components/skeleton/HomeSkeleton";
 
 import { UserDataType } from "../types/usedType";
 
@@ -21,9 +22,6 @@ export default function Home() {
   const {
     productsQuery: { isLoading, data: products },
   } = useProduct(searchKeyword);
-  {
-    isLoading && <p>Loading..</p>;
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,6 +49,10 @@ export default function Home() {
     };
     fetchData();
   }, [user, setGeekUser]);
+
+  if (isLoading) {
+    return <HomeSkeleton />;
+  }
 
   return (
     <div className="h-full min-h-screen">
