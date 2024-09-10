@@ -176,7 +176,6 @@ export async function getWishlistItems(userId: string): Promise<Product[]> {
   const wishlistRef = ref(database, `wishlist/${userId}`);
   return get(wishlistRef).then((snapshot) => {
     if (snapshot.exists()) {
-      console.log(Object.values(snapshot.val()));
       return Object.values(snapshot.val());
     }
     return [];
@@ -377,7 +376,6 @@ export async function usedDetailItem(itemId: string) {
     console.error("Item not found");
   }
 }
-
 
 // 댓글 추가 ( = 아이템 데이터 수정 )
 interface DataType {
@@ -614,11 +612,12 @@ export async function updateOrderUsedStatus({
         quantity,
         salesStatus: "completion",
       },
-      [`userData/${usedMessage.buyer.userId}/messages/${usedMessage.messageId}`]: {
-        ...usedMessage,
-        quantity,
-        salesStatus: "completion",
-      },
+      [`userData/${usedMessage.buyer.userId}/messages/${usedMessage.messageId}`]:
+        {
+          ...usedMessage,
+          quantity,
+          salesStatus: "completion",
+        },
     };
     await update(ref(database), quantityUpdates);
   } catch (error) {
