@@ -50,15 +50,12 @@ export default function Home() {
     fetchData();
   }, [user, setGeekUser]);
 
-  if (isLoading) {
-    return <HomeSkeleton />;
-  }
-
   return (
     <div className="h-full min-h-screen">
       <Header />
       <SearchHeader />
       <div>
+        {isLoading && <HomeSkeleton />}
         {keyword ? (
           <div>
             {products?.length !== 0 ? (

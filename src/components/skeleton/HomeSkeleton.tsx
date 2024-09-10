@@ -1,11 +1,9 @@
 export default function HomeSkeleton() {
   return (
     <div className="container w-[600px] animate-pulse">
-      <header className="w-[600px] flex mb-4 text-xl ml-[25px]">
-        <div className="w-9/12 p-6 outline-none bg-[#EEE] rounded-[8px] pl-4 mt-[220px]"></div>
-      </header>
       <div className="w-full h-[300px] mt-[30px]">
         <div className="bg-[#EEE] w-[597px] h-[100%]"></div>
+        <p className="w-[120px] h-[20px] bg-[#EEE] ml-[30px] mt-[40px] mb-[15px]"></p>
       </div>
       <div className="flex justify-center">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[20px] mt-[100px]">
