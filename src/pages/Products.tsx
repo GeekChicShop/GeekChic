@@ -6,6 +6,7 @@ import Header from "../components/common/Header";
 import SearchHeader from "../components/common/SearchHeader";
 import ProductCard from "../components/main/ProductCard";
 import { getProducts } from "../api/firebase";
+import ProductSkeleton from "../components/skeleton/ProductSkeleton";
 
 import { Product } from "../types/mainType";
 import Button from "../components/ui/Button";
@@ -42,8 +43,8 @@ export default function Products() {
     return products.filter((product) => product.category === filter);
   }
 
-  {
-    isLoading && <p>Loading..</p>;
+  if (isLoading) {
+    return <ProductSkeleton />;
   }
   {
     error && <p>Something is wrong</p>;

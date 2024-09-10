@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { wishlistState, userState } from "../atoms/userAtom";
 import { getWishlistItems, setWishlistItems } from "../api/firebase";
@@ -46,7 +46,7 @@ export default function Wishlist() {
           </div>
           <ul className="px-11 py-2 pb-4">
             {wishlist.map((product: Product) => (
-              <>
+              <React.Fragment key={product.id}>
                 <button onClick={() => handleWishlist(product)}>
                   <img
                     src={closedIcon}
@@ -79,7 +79,7 @@ export default function Wishlist() {
                   </div>
                 </li>
                 <p className="border border-[#D9D9D9] w-[520px] m-auto mt-[40px] mb-[45px]"></p>
-              </>
+              </React.Fragment>
             ))}
           </ul>
         </>
@@ -88,10 +88,12 @@ export default function Wishlist() {
           <div className="text-2xl mt-[130px] mb-[40px]">
             관심있는 상품을 저장해보세요.
           </div>
-          <Button
-            text="상품으로 바로가기"
-            className="w-[220px] border bg-white text-puple border-puple hover:bg-puple hover:text-white"
-          />
+          <Link to="/products">
+            <Button
+              text="상품으로 바로가기"
+              className="w-[220px] border bg-white text-puple border-puple hover:bg-puple hover:text-white"
+            />
+          </Link>
         </div>
       )}
     </div>
