@@ -6,7 +6,7 @@ import { userState } from "../../atoms/userAtom";
 import CartItem from "./CartItem";
 import PriceCard from "./PriceCard";
 import useCart from "../../hook/useCart";
-import Button from "../ui/button";
+import Button from "../ui/Button";
 
 import TotalPlusIcon from "../../assets/icons/totalPlus.svg";
 import EqualsIcon from "../../assets/icons/totalEquals.svg";

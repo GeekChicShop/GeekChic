@@ -4,7 +4,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { addOrderList, removeFromCart } from "../api/firebase";
 import PaymentCard from "../components/payment/PaymentCard";
 import { PayProduct, OrderDetails } from "../types/mainType";
-import Button from "../components/ui/button";
+import Button from "../components/ui/Button";
 
 export default function Payment() {
   const { id } = useParams<string>();

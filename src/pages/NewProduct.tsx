@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { uploadImage } from "../api/uploader";
 import useProduct from "../hook/useProduct";
 import { AddProduct } from "../types/mainType";
-import Button from "../components/ui/button";
+import Button from "../components/ui/Button";
 
 export default function NewProduct() {
   const [product, setProduct] = useState<Partial<AddProduct>>({});
