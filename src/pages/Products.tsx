@@ -43,9 +43,9 @@ export default function Products() {
     return products.filter((product) => product.category === filter);
   }
 
-  if (isLoading) {
-    return <ProductSkeleton />;
-  }
+  // if (!isLoading) {
+  //   return <ProductSkeleton />;
+  // }
   {
     error && <p>Something is wrong</p>;
   }
@@ -54,7 +54,8 @@ export default function Products() {
     <div className="h-full min-h-screen">
       <Header />
       <SearchHeader />
-      <div className="flex justify-center ">
+      {isLoading && <ProductSkeleton />}
+      <div className="flex justify-center">
         <ul className="flex justify-center gap-[45px] mt-[20px] mb-[40px] text-[23px] border-b-2 border-[#D9D9D9] w-[515px]">
           {filters.map((value, index) => (
             <li key={index} className="relative">
