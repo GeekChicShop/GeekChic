@@ -76,7 +76,7 @@ export default function CommentBtn({ comments }: CommentBtnProps) {
               <Button
                 text="삭제"
                 onClick={() => onClickRemoveComment(comments.id)}
-                className="w-[40px] h-[40px] ml-2 mb-2 bg-gray-200"
+                className="w-[40px] h-[40px] ml-2 mb-2 bg-gray-200 mr-[20px]"
               />
             </>
           )}

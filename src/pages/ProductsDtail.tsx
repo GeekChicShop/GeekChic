@@ -8,10 +8,10 @@ import {
   addOrUpdateToCart,
 } from "../api/firebase";
 
-import Comment from "../components/main/Comment";
-import CommentCard from "../components/main/CommentCard";
 import ImageCard from "../components/productDetail/ImageCard";
 import PurchaseOptions from "../components/productDetail/PurchaseOptions";
+import Comment from "../components/productDetail/Comment";
+import CommentCard from "../components/productDetail/CommentCard";
 
 import { ProductComments } from "../types/mainType";
 import { userState, wishlistState } from "../atoms/userAtom";
