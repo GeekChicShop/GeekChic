@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  ChangeEvent,
-  FormEvent,
-  useRef,
-  useEffect,
-} from "react";
+import { useState, ChangeEvent, FormEvent, useRef, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
 import useComment from "../../hook/useComment";
@@ -18,7 +12,7 @@ export default function Comment({ product }: { product: ProductComments }) {
   const user = useRecoilValue(userState);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const id = product.id;
-  const commentArray = Object.values(product.comments);
+  const commentArray = product.comments ? Object.values(product.comments) : [];
   const averageRank = commentArray.length
     ? commentArray.reduce((acc, comment) => acc + (comment.rank ?? 0), 0) /
       commentArray.length
