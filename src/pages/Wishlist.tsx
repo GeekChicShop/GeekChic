@@ -14,12 +14,12 @@ export default function Wishlist() {
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const [wishlist, setWishlist] = useRecoilState(wishlistState);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (user) {
       getWishlistItems(user.uid).then((items) => {
         setWishlist(items);
-        setLoading(false); // 데이터를 불러오면 로딩 종료
+        setIsLoading(false);
       });
     }
   }, [user, setWishlist]);
@@ -42,7 +42,7 @@ export default function Wishlist() {
       <div className="p-11 mb-[10px]">
         <h1 className="text-3xl font-bold text-left">관심물품</h1>
       </div>
-      {loading && <WishlistSkeleton />}
+      {isLoading && <WishlistSkeleton />}
       {wishlist?.length !== 0 ? (
         <>
           <div className="flex text-lg gap-1 text-left px-11 mb-[10px]">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
@@ -12,6 +12,7 @@ import ImageCard from "../components/productDetail/ImageCard";
 import PurchaseOptions from "../components/productDetail/PurchaseOptions";
 import Comment from "../components/productDetail/Comment";
 import CommentCard from "../components/productDetail/CommentCard";
+import ProductDetailSkeleton from "../components/skeleton/ProductDetailSkeleton";
 
 import { ProductComments } from "../types/mainType";
 import { userState, wishlistState } from "../atoms/userAtom";
@@ -27,8 +28,18 @@ export default function ProductsDtail() {
   const { description, image, price, options } = product;
 
   const [selected, setSelected] = useState<string>(options && options[0]);
+  const [isLoading, setIsLoading] = useState(true);
   const isInWishlist = wishlist.some((item) => item.id === product.id);
   const id = user?.uid;
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      setIsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setIsLoading(false);
+    };
+    fetchProductDetails();
+  }, [product]);
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
@@ -68,24 +79,30 @@ export default function ProductsDtail() {
 
   return (
     <div className="container w-[600px]">
-      <ImageCard
-        image={image}
-        description={description}
-        handleBack={handleBack}
-      />
-      <PurchaseOptions
-        price={price}
-        description={description}
-        options={options}
-        selected={selected}
-        handleSelect={handleSelect}
-        handleWishlist={handleWishlist}
-        handleClickCarts={handleClickCarts}
-        handleClickPayment={handleClickPayment}
-        isInWishlist={isInWishlist}
-      />
-      <Comment key={product.id} product={product} />
-      <CommentCard />
+      {isLoading ? (
+        <ProductDetailSkeleton />
+      ) : (
+        <>
+          <ImageCard
+            image={image}
+            description={description}
+            handleBack={handleBack}
+          />
+          <PurchaseOptions
+            price={price}
+            description={description}
+            options={options}
+            selected={selected}
+            handleSelect={handleSelect}
+            handleWishlist={handleWishlist}
+            handleClickCarts={handleClickCarts}
+            handleClickPayment={handleClickPayment}
+            isInWishlist={isInWishlist}
+          />
+          <Comment key={product.id} product={product} />
+          <CommentCard />
+        </>
+      )}
     </div>
   );
 }
