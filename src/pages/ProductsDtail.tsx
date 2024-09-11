@@ -10,13 +10,11 @@ import {
 
 import Comment from "../components/main/Comment";
 import CommentCard from "../components/main/CommentCard";
-import { userState, wishlistState } from "../atoms/userAtom";
-import { ProductComments } from "../types/mainType";
-import Button from "../components/ui/Button";
+import ImageCard from "../components/productDetail/ImageCard";
+import PurchaseOptions from "../components/productDetail/PurchaseOptions";
 
-import HeartIcon from "../assets/icons/heart.svg";
-import HeartFullIcon from "../assets/icons/heart_full.svg";
-import Chevron_left from "../assets/icons/chevron_left.svg";
+import { ProductComments } from "../types/mainType";
+import { userState, wishlistState } from "../atoms/userAtom";
 
 export default function ProductsDtail() {
   const location = useLocation();
@@ -70,57 +68,22 @@ export default function ProductsDtail() {
 
   return (
     <div className="container w-[600px]">
-      <img
-        src={Chevron_left}
-        alt="이전 페이지로"
-        className="w-10 h-10 cursor-pointer "
-        onClick={handleBack}
+      <ImageCard
+        image={image}
+        description={description}
+        handleBack={handleBack}
       />
-      <img className="w-[598px] h-[550px]" src={image} alt={description} />
-      <div className="flex m-[30px] gap-[20px]">
-        <div className="w-[100px] h-[100px] bg-lightgray"></div>
-        <div className="w-[100px] h-[100px] bg-lightgray"></div>
-      </div>
-      <div className="flex gap-[460px] text-lg text-left ml-[30px] mt-[25px]">
-        <p className="">구매가</p>
-        <div className="cursor-pointer" onClick={handleWishlist}>
-          <img
-            className="w-[30px] h-[30px]"
-            src={isInWishlist ? HeartFullIcon : HeartIcon}
-            alt="likeButton"
-          />
-        </div>
-      </div>
-      <p className="text-2xl font-bold text-left ml-[30px]">{`${price}원`}</p>
-      <h1 className="text-lg text-left ml-[30px] mt-[15px]">{description}</h1>
-      <div className="w-full flex flex-col">
-        <select
-          className="p-3 m-7 border-2 border-brand rounded-md outline-none bg-[#EEE]"
-          id="select"
-          onChange={handleSelect}
-          value={selected}
-        >
-          {options &&
-            options.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-        </select>
-      </div>
-      <p className="border border-[#D9D9D9] w-[550px] m-auto"></p>
-      <div className="flex justify-center gap-[50px] mt-[30px]">
-        <Button
-          text="장바구니 담기"
-          onClick={handleClickCarts}
-          className="w-[250px] bg-red text-white border border-red hover:bg-white hover:text-red"
-        />{" "}
-        <Button
-          text="바로구매"
-          onClick={handleClickPayment}
-          className="w-[250px] bg-puple text-white border border-puple hover:bg-white hover:text-puple"
-        />
-      </div>
+      <PurchaseOptions
+        price={price}
+        description={description}
+        options={options}
+        selected={selected}
+        handleSelect={handleSelect}
+        handleWishlist={handleWishlist}
+        handleClickCarts={handleClickCarts}
+        handleClickPayment={handleClickPayment}
+        isInWishlist={isInWishlist}
+      />
       <Comment key={product.id} product={product} />
       <CommentCard />
     </div>

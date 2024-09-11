@@ -43,18 +43,22 @@ export default function Products() {
     return products.filter((product) => product.category === filter);
   }
 
-  if (isLoading) {
-    return <ProductSkeleton />;
-  }
-  {
-    error && <p>Something is wrong</p>;
-  }
+  if (error)
+    return (
+      <div>
+        <p>데이터를 가져오는 동안 문제가 발생했습니다</p>
+        <p className="cursor-pointer" onClick={() => window.location.reload()}>
+          geekchic 상품 페이지 새로고침
+        </p>
+      </div>
+    );
 
   return (
     <div className="h-full min-h-screen">
       <Header />
       <SearchHeader />
-      <div className="flex justify-center ">
+      {isLoading && <ProductSkeleton />}
+      <div className="flex justify-center">
         <ul className="flex justify-center gap-[45px] mt-[20px] mb-[40px] text-[23px] border-b-2 border-[#D9D9D9] w-[515px]">
           {filters.map((value, index) => (
             <li key={index} className="relative">
