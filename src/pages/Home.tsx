@@ -54,8 +54,8 @@ export default function Home() {
     <div className="h-full min-h-screen">
       <Header />
       <SearchHeader />
+      {isLoading && <HomeSkeleton />}
       <div>
-        {isLoading && <HomeSkeleton />}
         {keyword ? (
           <div>
             {products?.length !== 0 ? (

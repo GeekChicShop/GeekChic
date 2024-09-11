@@ -43,12 +43,15 @@ export default function Products() {
     return products.filter((product) => product.category === filter);
   }
 
-  // if (!isLoading) {
-  //   return <ProductSkeleton />;
-  // }
-  {
-    error && <p>Something is wrong</p>;
-  }
+  if (error)
+    return (
+      <div>
+        <p>데이터를 가져오는 동안 문제가 발생했습니다</p>
+        <p className="cursor-pointer" onClick={() => window.location.reload()}>
+          geekchic 상품 페이지 새로고침
+        </p>
+      </div>
+    );
 
   return (
     <div className="h-full min-h-screen">
