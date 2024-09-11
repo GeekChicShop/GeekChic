@@ -10,13 +10,13 @@ import {
 
 import Comment from "../components/main/Comment";
 import CommentCard from "../components/main/CommentCard";
-import { userState, wishlistState } from "../atoms/userAtom";
-import { ProductComments } from "../types/mainType";
+import ImageCard from "../components/productDetail/ImageCard";
 import Button from "../components/ui/Button";
+import { ProductComments } from "../types/mainType";
+import { userState, wishlistState } from "../atoms/userAtom";
 
 import HeartIcon from "../assets/icons/heart.svg";
 import HeartFullIcon from "../assets/icons/heart_full.svg";
-import Chevron_left from "../assets/icons/chevron_left.svg";
 
 export default function ProductsDtail() {
   const location = useLocation();
@@ -70,7 +70,12 @@ export default function ProductsDtail() {
 
   return (
     <div className="container w-[600px]">
-      <img
+      <ImageCard
+        image={image}
+        description={description}
+        handleBack={handleBack}
+      />
+      {/* <img
         src={Chevron_left}
         alt="이전 페이지로"
         className="w-10 h-10 cursor-pointer "
@@ -80,7 +85,7 @@ export default function ProductsDtail() {
       <div className="flex m-[30px] gap-[20px]">
         <div className="w-[100px] h-[100px] bg-lightgray"></div>
         <div className="w-[100px] h-[100px] bg-lightgray"></div>
-      </div>
+      </div> */}
       <div className="flex gap-[460px] text-lg text-left ml-[30px] mt-[25px]">
         <p className="">구매가</p>
         <div className="cursor-pointer" onClick={handleWishlist}>
