@@ -12,7 +12,7 @@ export default function ProductCard({ product }: { product: Product }) {
           state: { product },
         });
       }}
-      className="border rounded-md truncate cursor-pointer"
+      className="border rounded-md truncate cursor-pointer hover:hover:brightness-75 transition"
     >
       <img className="w-[120px] h-[130px]" src={image} alt="img" />
     </li>

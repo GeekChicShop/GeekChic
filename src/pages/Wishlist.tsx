@@ -65,7 +65,7 @@ export default function Wishlist() {
                       state: { product },
                     });
                   }}
-                  className="flex mb-4 w-[550px] hover:hover:brightness-75 cursor-pointer"
+                  className="flex mb-4 w-[550px] hover:hover:brightness-75 cursor-pointer transition"
                   key={product.id}
                 >
                   <img
