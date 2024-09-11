@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -8,15 +8,19 @@ import { Product } from "../types/mainType";
 import Button from "../components/ui/Button";
 
 import closedIcon from "../assets/icons/close.svg";
+import WishlistSkeleton from "../components/skeleton/WishlistSkeleton";
 
 export default function Wishlist() {
   const user = useRecoilValue(userState);
   const navigate = useNavigate();
   const [wishlist, setWishlist] = useRecoilState(wishlistState);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (user) {
-      getWishlistItems(user.uid).then(setWishlist);
+      getWishlistItems(user.uid).then((items) => {
+        setWishlist(items);
+        setLoading(false); // 데이터를 불러오면 로딩 종료
+      });
     }
   }, [user, setWishlist]);
 
@@ -38,6 +42,7 @@ export default function Wishlist() {
       <div className="p-11 mb-[10px]">
         <h1 className="text-3xl font-bold text-left">관심물품</h1>
       </div>
+      {loading && <WishlistSkeleton />}
       {wishlist?.length !== 0 ? (
         <>
           <div className="flex text-lg gap-1 text-left px-11 mb-[10px]">
