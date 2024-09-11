@@ -54,53 +54,59 @@ export default function Home() {
     <div className="h-full min-h-screen">
       <Header />
       <SearchHeader />
-      {isLoading && <HomeSkeleton />}
-      <div>
-        {keyword ? (
-          <div>
-            {products?.length !== 0 ? (
-              <div>
-                <div className="w-full h-[300px] mt-[30px]">
-                  <img
-                    className="object-cover object-center w-[100%] h-[100%]"
-                    src="/public/img/mainImg.jpg"
-                    alt="mainImage"
-                  />
+      {isLoading ? (
+        <HomeSkeleton />
+      ) : (
+        <div>
+          {keyword ? (
+            <div>
+              {products?.length !== 0 ? (
+                <div>
+                  <div className="w-full h-[300px] mt-[30px]">
+                    <img
+                      className="object-cover object-center w-[100%] h-[100%]"
+                      src="/public/img/mainImg.jpg"
+                      alt="mainImage"
+                    />
+                  </div>
+                  <p className="text-lg font-bold text-left ml-[30px] mt-[30px] mb-[15px] flex">
+                    {keyword}
+                    <p className="ml-[5px] text-[#BEBEBE]">
+                      {products?.length}
+                    </p>
+                  </p>
                 </div>
-                <p className="text-lg font-bold text-left ml-[30px] mt-[30px] mb-[15px] flex">
-                  {keyword}
-                  <p className="ml-[5px] text-[#BEBEBE]">{products?.length}</p>
-                </p>
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
-        ) : (
-          <div>
-            <div className="w-full h-[300px] mt-[30px]">
-              <img
-                className="object-cover object-center w-[100%] h-[100%]"
-                src="/public/img/mainImg.jpg"
-                alt="mainImage"
-              />
-            </div>
-            <div className="flex space-x-[320px] ml-[30px] items-center mt-[30px] mb-[20px]">
-              <div className="text-lg font-bold text-left">최근 등록 상품</div>
-              {user && user.isAdmin && (
-                <Link to="products/new">
-                  <Button
-                    text="상품 등록"
-                    padding="py-2"
-                    className="px-7 border bg-puple text-white border-puple hover:bg-white hover:text-puple"
-                  />
-                </Link>
+              ) : (
+                ""
               )}
             </div>
-          </div>
-        )}
-      </div>
-
+          ) : (
+            <div>
+              <div className="w-full h-[300px] mt-[30px]">
+                <img
+                  className="object-cover object-center w-[100%] h-[100%]"
+                  src="/public/img/mainImg.jpg"
+                  alt="mainImage"
+                />
+              </div>
+              <div className="flex space-x-[320px] ml-[30px] items-center mt-[30px] mb-[20px]">
+                <div className="text-lg font-bold text-left">
+                  최근 등록 상품
+                </div>
+                {user && user.isAdmin && (
+                  <Link to="products/new">
+                    <Button
+                      text="상품 등록"
+                      padding="py-2"
+                      className="px-7 border bg-puple text-white border-puple hover:bg-white hover:text-puple"
+                    />
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
       <div className="flex justify-center">
         {products?.length !== 0 ? (
           <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[20px] mb-[100px]">
