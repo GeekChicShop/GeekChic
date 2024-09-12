@@ -35,7 +35,7 @@ export default function ProductsDtail() {
   useEffect(() => {
     const fetchProductDetails = async () => {
       setIsLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((time) => setTimeout(time, 500));
       setIsLoading(false);
     };
     fetchProductDetails();
