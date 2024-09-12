@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import useComment from "../../hook/useComment";
 import CommentBtn from "./CommentBtn";
@@ -16,12 +15,12 @@ export default function CommentCard() {
     const date = new Date(dateString);
     return date.toISOString().split("T")[0];
   }
-  {
-    isLoading && <p>Loading..</p>;
-  }
+
   return (
     <div className="text-[14px] mt-[50px]">
-      {comments && comments.length > 0 ? (
+      {isLoading ? (
+        <p>Loading..</p>
+      ) : comments && comments.length > 0 ? (
         comments?.map((comment) => (
           <div key={comment.id} className="mt-[50px]">
             <div className="flex ml-[40px]">

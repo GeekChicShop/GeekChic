@@ -12,6 +12,16 @@ export default function PurchaseOptions({
   handleClickCarts,
   handleClickPayment,
   isInWishlist,
+}: {
+  price: string;
+  description: string;
+  options: string[];
+  selected: string;
+  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleWishlist: () => void;
+  handleClickCarts: () => void;
+  handleClickPayment: () => void;
+  isInWishlist: boolean;
 }) {
   return (
     <div>

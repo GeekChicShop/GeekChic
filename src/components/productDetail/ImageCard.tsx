@@ -1,6 +1,14 @@
 import Chevron_left from "../../assets/icons/chevron_left.svg";
 
-export default function ImageCard({ image, description, handleBack }) {
+export default function ImageCard({
+  image,
+  description,
+  handleBack,
+}: {
+  image: string;
+  description: string;
+  handleBack: () => void;
+}) {
   return (
     <>
       <img
