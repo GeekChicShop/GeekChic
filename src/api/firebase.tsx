@@ -143,7 +143,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function addNewProduct(
   product: AddProduct,
-  image: string
+  image: string[]
 ): Promise<void> {
   const id = uuidv4();
   const definedId = id.replace(/[.#$[\]]/g, "_");

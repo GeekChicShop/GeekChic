@@ -6,7 +6,6 @@ import Button from "../components/ui/Button";
 
 export default function NewProduct() {
   const [product, setProduct] = useState<Partial<AddProduct>>({});
-  // const [file, setFile] = useState<File | null>(null);
   const [file, setFile] = useState<string[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [isUploading, setIsUploading] = useState(false);
@@ -15,7 +14,7 @@ export default function NewProduct() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
 
     if (files) {
@@ -23,7 +22,12 @@ export default function NewProduct() {
         URL.createObjectURL(file)
       );
       setPreviewImages((prevImages) => prevImages.concat(newPreviewImages));
-      setFile((prevFiles) => prevFiles.concat(newPreviewImages));
+
+      const uploadedUrls = await Promise.all(
+        Array.from(files).map((file) => uploadImage(file))
+      );
+      setFile((prevFiles) => prevFiles.concat(uploadedUrls));
+
       return;
     }
     setProduct((product) => ({ ...product, [name]: value }));
@@ -34,9 +38,8 @@ export default function NewProduct() {
     setIsUploading(true);
 
     if (file.length > 0) {
-      const url = await uploadImage(file[0]);
       addProduct.mutate(
-        { product: product as AddProduct, url },
+        { product: product as AddProduct, file },
         {
           onSuccess: () => {
             setSuccess("성공적으로 제품이 추가되었습니다.");
@@ -54,24 +57,6 @@ export default function NewProduct() {
     <section className="w-[600px] container text-center">
       <h2 className="text-2xl font-bold my-4">새로운 제품 등록</h2>
       {success && <p className="my-2">✅ {success}</p>}
-      {/* {previewImages.map((image, index) => (
-        <div
-          key={index}
-          className="w-20 h-20 bg-gray-200 relative flex items-center justify-center"
-        >
-          <img
-            src={image}
-            alt={`uploaded ${index}`}
-            className="object-cover w-full h-full"
-          />
-          <button
-            // onClick={() => removeImage(index)}
-            className="absolute top-0 right-0 p-1 text-xs text-gray-500"
-          >
-            ×
-          </button>
-        </div>
-      ))} */}
       <form
         className="flex flex-col px-12 gap-1 mt-[70px]"
         onSubmit={handleSubmit}
@@ -103,23 +88,15 @@ export default function NewProduct() {
                 alt={`uploaded ${index}`}
                 className="object-cover w-full h-full"
               />
-              <button
+              <div
                 // onClick={() => removeImage(index)}
                 className="absolute top-0 right-0 p-1 text-xs text-gray-500"
               >
                 ×
-              </button>
+              </div>
             </div>
           ))}
         </div>
-
-        {/* <input
-          type="file"
-          accept="image/*"
-          name="file"
-          required
-          onChange={handleChange}
-        /> */}
         <input
           type="text"
           placeholder="제품명"
@@ -163,6 +140,7 @@ export default function NewProduct() {
         />
         <Button
           text="제품 등록하기"
+          type="submit"
           isLoading={isUploading}
           className="mb-[100px] mt-[10px] bg-puple text-white border border-puple hover:bg-white hover:text-puple"
         />

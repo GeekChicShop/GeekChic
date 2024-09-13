@@ -19,6 +19,16 @@ export default function ImageCard({
       />
       <img className="w-[598px] h-[550px]" src={image} alt={description} />
       <div className="flex m-[30px] gap-[20px]">
+        {/* {image ? (
+          image.map((img) => (
+            <img className="w-[100px] h-[100px]" src={img} alt={description} />
+          ))
+        ) : (
+          <>
+            <div className="w-[100px] h-[100px] bg-lightgray"></div>
+            <div className="w-[100px] h-[100px] bg-lightgray"></div>
+          </>
+        )} */}
         <div className="w-[100px] h-[100px] bg-lightgray"></div>
         <div className="w-[100px] h-[100px] bg-lightgray"></div>
       </div>
