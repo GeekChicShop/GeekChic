@@ -4,7 +4,7 @@ import { Product, AddProduct } from "../types/mainType";
 
 interface AddProductVariables {
   product: AddProduct;
-  url: string;
+  file: string[];
 }
 
 export default function useProduct(searchKeyword: string) {
@@ -17,7 +17,7 @@ export default function useProduct(searchKeyword: string) {
   });
 
   const addProduct = useMutation<void, Error, AddProductVariables>({
-    mutationFn: ({ product, url }) => addNewProduct(product, url),
+    mutationFn: ({ product, file }) => addNewProduct(product, file),
     onSuccess: async () =>
       await queryClient.invalidateQueries({ queryKey: ["products"] }),
   });
