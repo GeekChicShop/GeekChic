@@ -1,15 +1,6 @@
-import React from "react";
+import { OrderProduct } from "../../../types/mainType";
 
-interface testProduct {
-  title: string;
-  description: string;
-  price: string;
-  image: string;
-  options: string[];
-  quantity: number;
-}
-
-export default function OrdersItem({ product }: { product: testProduct }) {
+export default function OrdersItem({ product }: { product: OrderProduct }) {
   return (
     <div className="flex mb-4 ml-[40px] w-[550px]">
       <img
