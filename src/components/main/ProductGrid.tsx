@@ -12,7 +12,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           ))}
         </ul>
       ) : (
-        <NoProductsFound />
+        <NoProductsFound text="검색하신 상품이 없어요." />
       )}
     </div>
   );

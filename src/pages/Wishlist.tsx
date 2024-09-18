@@ -52,7 +52,7 @@ export default function Wishlist() {
           navigate={navigate}
         />
       ) : (
-        <NoProductsFound />
+        <NoProductsFound text="관심있는 상품을 저장해보세요." />
       )}
     </div>
   );

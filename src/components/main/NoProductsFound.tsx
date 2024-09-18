@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/ui/Button";
 
-export default function NoProductsFound() {
+export default function NoProductsFound({ text }: { text: string }) {
   return (
     <div className="h-[100vh]">
-      <div className="text-2xl mt-[130px] mb-[40px]">
-        검색하신 상품이 없어요.
-      </div>
+      <div className="text-2xl mt-[130px] mb-[40px]">{text}</div>
       <Link to="/products">
         <Button
           text="상품으로 바로가기"
