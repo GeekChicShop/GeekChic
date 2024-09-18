@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { wishlistState, userState } from "../atoms/userAtom";
 import { getWishlistItems, setWishlistItems } from "../api/firebase";
 import { Product } from "../types/mainType";
-import Button from "../components/ui/Button";
+import WishlistProducts from "../components/\bwishlist/WishlistProducts";
 
-import closedIcon from "../assets/icons/close.svg";
 import WishlistSkeleton from "../components/skeleton/WishlistSkeleton";
+import NoProductsFound from "../components/main/NoProductsFound";
 
 export default function Wishlist() {
   const user = useRecoilValue(userState);
@@ -45,69 +45,14 @@ export default function Wishlist() {
       </div>
       {isLoading ? (
         <WishlistSkeleton />
+      ) : wishlist?.length !== 0 ? (
+        <WishlistProducts
+          wishlist={wishlist}
+          handleWishlist={handleWishlist}
+          navigate={navigate}
+        />
       ) : (
-        <>
-          {wishlist?.length !== 0 ? (
-            <>
-              <div className="flex text-lg gap-1 text-left px-11 mb-[10px]">
-                <p>전체</p>
-                <p className="text-[#a9a9a9]">{wishlist.length}</p>
-              </div>
-              <ul className="px-11 py-2 pb-4">
-                {wishlist.map((product: Product) => (
-                  <React.Fragment key={product.id}>
-                    <button onClick={() => handleWishlist(product)}>
-                      <img
-                        src={closedIcon}
-                        alt="closed"
-                        className="w-[15px] h-[15px] ml-[500px] brightness-150"
-                      />
-                    </button>
-                    <li
-                      onClick={() => {
-                        navigate(`/products/detail/${product.id}`, {
-                          state: { product },
-                        });
-                      }}
-                      className="flex mb-4 w-[550px] hover:hover:brightness-75 cursor-pointer transition"
-                      key={product.id}
-                    >
-                      <img
-                        className="w-[150px] h-[150px] rounded-[5px]"
-                        src={product.image}
-                        alt={product.title}
-                      />
-                      <div className="text-left px-4 w-[380px]">
-                        <div className="flex gap-[280px] items-start">
-                          <h3 className="text-xl font-bold mb-[10px]">
-                            {product.title}
-                          </h3>
-                        </div>
-                        <p className="text-xl mb-[55px]">
-                          {product.description}
-                        </p>
-                        <p className="text-xl font-bold text-right">{`${product.price}원`}</p>
-                      </div>
-                    </li>
-                    <p className="border border-[#D9D9D9] w-[520px] m-auto mt-[40px] mb-[45px]"></p>
-                  </React.Fragment>
-                ))}
-              </ul>
-            </>
-          ) : (
-            <div className="h-[100vh]">
-              <div className="text-2xl mt-[130px] mb-[40px]">
-                관심있는 상품을 저장해보세요.
-              </div>
-              <Link to="/products">
-                <Button
-                  text="상품으로 바로가기"
-                  className="w-[220px] border bg-white text-puple border-puple hover:bg-puple hover:text-white"
-                />
-              </Link>
-            </div>
-          )}
-        </>
+        <NoProductsFound />
       )}
     </div>
   );
