@@ -10,6 +10,7 @@ import NoProductsFound from "../../main/NoProductsFound";
 
 import TotalPlusIcon from "../../../assets/icons/totalPlus.svg";
 import EqualsIcon from "../../../assets/icons/totalEquals.svg";
+import MyCartSkeleton from "../../skeleton/MyCartSkeleton";
 
 export default function MyCart() {
   const navigate = useNavigate();
@@ -32,8 +33,9 @@ export default function MyCart() {
       state: { payProduct: carts, user },
     });
   };
-  {
-    isLoading && <p>Loading..</p>;
+
+  if (isLoading) {
+    return <MyCartSkeleton />;
   }
   return (
     <div className="container w-[600px]">
