@@ -21,13 +21,14 @@ export default function OrdersDetail() {
       (prev, current) => prev + parseInt(current.price) * current.quantity,
       0
     ) || 0;
-  if (orders.paymentMethod === "creditcard") {
-    orders.paymentMethod = "카드결제";
-  } else if (orders.paymentMethod === "cash") {
-    orders.paymentMethod = "계좌이체";
-  } else if (orders.paymentMethod === "pay") {
-    orders.paymentMethod = "페이결제";
-  }
+
+  const paymentMethods: Record<string, string> = {
+    creditcard: "카드결제",
+    cash: "계좌이체",
+    pay: "페이결제",
+  };
+  const paymentMethod =
+    paymentMethods[orders.paymentMethod] || "알 수 없는 결제 방법";
 
   return (
     <div className="container w-[600px]">
@@ -43,7 +44,7 @@ export default function OrdersDetail() {
         phone={orders.phone}
         address={orders.address}
       />
-      <PaymentMethod paymentMethod={orders.paymentMethod} />
+      <PaymentMethod paymentMethod={paymentMethod} />
       <Link to={`/my/${userId}`}>
         <button className="w-[550px] py-3 bg-[#8F5BBD] text-[#fff] border border-[#8F5BBD] rounded-md hover:bg-[#fff] hover:text-[#8F5BBD] duration-200">
           마이페이지로 가기
