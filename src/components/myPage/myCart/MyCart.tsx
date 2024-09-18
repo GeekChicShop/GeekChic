@@ -1,15 +1,14 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
-import { userState } from "../../atoms/userAtom";
+import { userState } from "../../../atoms/userAtom";
 import CartItem from "./CartItem";
 import PriceCard from "./PriceCard";
-import useCart from "../../hook/useCart";
-import Button from "../ui/Button";
+import useCart from "../../../hook/useCart";
+import Button from "../../ui/Button";
 
-import TotalPlusIcon from "../../assets/icons/totalPlus.svg";
-import EqualsIcon from "../../assets/icons/totalEquals.svg";
+import TotalPlusIcon from "../../../assets/icons/totalPlus.svg";
+import EqualsIcon from "../../../assets/icons/totalEquals.svg";
 
 export default function MyCart() {
   const navigate = useNavigate();
@@ -37,9 +36,6 @@ export default function MyCart() {
   }
   return (
     <div className="container w-[600px]">
-      <div className="flex justify-center mt-[80px] mb-[10px]">
-        <h1 className="text-3xl font-bold text-left mb-[20px]">장바구니</h1>
-      </div>
       <div className="flex text-lg gap-1 text-left px-11 mb-[10px]">
         <p className="font-bold mr-[5px]">전체</p>
         <p className="text-lightgray">{carts?.length}</p>
