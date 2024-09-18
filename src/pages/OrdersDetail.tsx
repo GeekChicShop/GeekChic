@@ -36,7 +36,7 @@ export default function OrdersDetail() {
           주문 내역 상세
         </h1>
       </div>
-      <OrderList items={items} />
+      <OrderList ordersId={orders.ordersId} items={items} />
       <OrderTotal totalPrice={totalPrice} shippingCost={shippingCost} />
       <OrderShippingInfo
         name={orders.name}
