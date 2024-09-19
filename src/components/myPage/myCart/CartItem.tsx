@@ -1,10 +1,9 @@
-import React from "react";
-import useCart from "../../hook/useCart";
-import { CartProducts } from "../../types/mainType";
+import useCart from "../../../hook/useCart";
+import { CartProducts } from "../../../types/mainType";
 
-import MinusIcon from "../../assets/icons/square_minus.svg";
-import PlusIcon from "../../assets/icons/square_plus.svg";
-import TrashIcon from "../../assets/icons/trash.svg";
+import MinusIcon from "../../../assets/icons/square_minus.svg";
+import PlusIcon from "../../../assets/icons/square_plus.svg";
+import TrashIcon from "../../../assets/icons/trash.svg";
 
 export default function CartItem({
   carts,
