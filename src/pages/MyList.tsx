@@ -1,10 +1,9 @@
-import React from "react";
 import { useLocation, useParams } from "react-router-dom";
-// import Cart from "../components/myPage/Cart";
 import Layout from "../components/myPage/_Layout";
 import OrderList from "../components/myPage/OrderList";
 import { UserDataType } from "../types/usedType";
-import MyCart from "../components/myPage/MyCart";
+import MyCart from "../components/myPage/myCart/MyCart";
+import { OrderItemsType } from "../types/usedType";
 
 interface StateProps {
   user: UserDataType;
@@ -20,10 +19,9 @@ const MyList = () => {
       <div className="p-4">
         <h1>
           {list == "carts" ? (
-            // <Cart carts={user.carts} />
             <MyCart />
           ) : (
-            <OrderList orders={user.orders} />
+            <OrderList orders={user.orders as OrderItemsType} />
           )}
         </h1>
       </div>
