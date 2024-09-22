@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Button from "../../components/ui/Button";
 import { User } from "firebase/auth";
+import Button from "../../components/ui/Button";
 
 interface AdminUser extends User {
   isAdmin: boolean;
