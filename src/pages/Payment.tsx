@@ -1,9 +1,9 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 import { addOrderList, removeFromCart } from "../api/firebase";
-import PaymentCard from "../components/payment/PaymentCard";
 import { PayProduct, OrderDetails } from "../types/mainType";
+import PaymentCard from "../components/payment/PaymentCard";
 import Button from "../components/ui/Button";
 
 export default function Payment() {
