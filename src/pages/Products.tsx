@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
+import { getProducts } from "../api/firebase";
 import Header from "../components/common/Header";
 import SearchHeader from "../components/common/SearchHeader";
-import { getProducts } from "../api/firebase";
 import ProductSkeleton from "../components/skeleton/ProductSkeleton";
 
 import { Product } from "../types/mainType";
