@@ -49,7 +49,7 @@ export default function OrdersDetail() {
           주문 내역 상세
         </h1>
       </div>
-      {!isLoading ? (
+      {isLoading ? (
         <OrdersDetailSkeleton />
       ) : (
         <>
