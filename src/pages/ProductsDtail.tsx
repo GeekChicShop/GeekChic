@@ -50,17 +50,28 @@ export default function ProductsDtail() {
   };
 
   const handleClickPayment = async () => {
-    const selectedProduct = [{ ...product, options: [selected], quantity: 1 }];
-    navigate(`/payment/${id}`, {
-      state: { payProduct: selectedProduct, user },
-    });
+    if (user) {
+      const selectedProduct = [
+        { ...product, options: [selected], quantity: 1 },
+      ];
+      navigate(`/payment/${id}`, {
+        state: { payProduct: selectedProduct, user },
+      });
+    } else {
+      alert("로그인이 필요합니다!");
+      navigate("/api/login");
+    }
   };
   const handleClickCarts = async () => {
-    const selectedProduct = { ...product, options: selected, quantity: 1 };
-    addOrUpdateToCart(id as string, selectedProduct);
-    alert(`장바구니에 추가가 되었습니다!`);
+    if (user) {
+      const selectedProduct = { ...product, options: selected, quantity: 1 };
+      addOrUpdateToCart(id as string, selectedProduct);
+      alert(`장바구니에 추가가 되었습니다!`);
+    } else {
+      alert("로그인이 필요합니다!");
+      navigate("/api/login");
+    }
   };
-
   const handleWishlist = async () => {
     if (user) {
       if (isInWishlist) {
@@ -74,6 +85,9 @@ export default function ProductsDtail() {
         const updatedWishlist = await getWishlistItems(user.uid);
         setWishlist(updatedWishlist);
       }
+    } else {
+      alert("로그인이 필요합니다!");
+      navigate("/api/login");
     }
   };
 
