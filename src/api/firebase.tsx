@@ -206,9 +206,23 @@ export async function newComment(
 
 export async function getCommentItems(productId: string): Promise<Comment[]> {
   const commentsRef = ref(getDatabase(), `products/${productId}/comments`);
-  return get(commentsRef).then((snapshot) => {
+  return await get(commentsRef).then((snapshot) => {
     if (snapshot.exists()) {
-      return Object.values(snapshot.val());
+      const comments: Comment[] = Object.values(snapshot.val());
+      // createdAt을 숫자 타입으로 변환하여 정렬
+      return comments.sort((a, b) => {
+        const dateA =
+          typeof a.createdAt === "string"
+            ? Date.parse(a.createdAt)
+            : a.createdAt;
+        const dateB =
+          typeof b.createdAt === "string"
+            ? Date.parse(b.createdAt)
+            : b.createdAt;
+
+        // createdAt이 숫자라면 오름차순으로 정렬
+        return dateB - dateA;
+      });
     }
     return [];
   });
