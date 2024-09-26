@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent, useRef } from "react";
+import { useState, ChangeEvent, FormEvent, useRef } from "react";
 import { uploadImage } from "../api/uploader";
 import useProduct from "../hook/useProduct";
 import { AddProduct } from "../types/mainType";
