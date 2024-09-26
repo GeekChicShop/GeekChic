@@ -1,8 +1,11 @@
-import React, { useState, ChangeEvent, FormEvent, useRef } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent, useRef } from "react";
 import { uploadImage } from "../api/uploader";
 import useProduct from "../hook/useProduct";
 import { AddProduct } from "../types/mainType";
 import Button from "../components/ui/Button";
+import { useRecoilValue } from "recoil";
+import { userState } from "../atoms/userAtom";
+import { Navigate } from "react-router-dom";
 
 export default function NewProduct() {
   const [product, setProduct] = useState<Partial<AddProduct>>({});
@@ -11,8 +14,13 @@ export default function NewProduct() {
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
   const { addProduct } = useProduct("");
-
+  const user = useRecoilValue(userState);
+  const userAdmin = user?.isAdmin;
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  if (!userAdmin) {
+    return <Navigate to="/" replace />;
+  }
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;
