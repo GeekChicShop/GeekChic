@@ -22,6 +22,8 @@ export default function Wishlist() {
         setWishlist(items);
         setIsLoading(false);
       });
+    } else {
+      setIsLoading(false);
     }
   }, [user, setWishlist]);
 

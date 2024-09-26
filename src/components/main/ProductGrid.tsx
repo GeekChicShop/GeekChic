@@ -3,6 +3,7 @@ import NoProductsFound from "./NoProductsFound";
 import { Product } from "../../types/mainType";
 
 export default function ProductGrid({ products }: { products: Product[] }) {
+  console.log(products);
   return (
     <div className="flex justify-center">
       {products?.length ? (
