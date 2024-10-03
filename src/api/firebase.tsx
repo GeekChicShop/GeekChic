@@ -220,7 +220,7 @@ export async function getCommentItems(productId: string): Promise<Comment[]> {
             ? Date.parse(b.createdAt)
             : b.createdAt;
 
-        // createdAt이 숫자라면 오름차순으로 정렬
+        // createdAt이 숫자라면 최신순으로 정렬
         return dateB - dateA;
       });
     }

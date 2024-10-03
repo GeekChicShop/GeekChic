@@ -63,6 +63,11 @@ export default function NewProduct() {
     }
   };
 
+  const removeImage = (index: number) => {
+    URL.revokeObjectURL(previewImages[index]); // 이미지 URL 해제
+    setPreviewImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
   return (
     <section className="w-[600px] container text-center">
       <h2 className="text-2xl font-bold my-4">새로운 제품 등록</h2>
@@ -99,7 +104,7 @@ export default function NewProduct() {
                 className="object-cover w-full h-full"
               />
               <div
-                // onClick={() => removeImage(index)}
+                onClick={() => removeImage(index)}
                 className="absolute top-0 right-0 p-1 text-xs text-gray-500"
               >
                 ×
