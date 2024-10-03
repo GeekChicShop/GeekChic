@@ -2,6 +2,20 @@ import Button from "../../components/ui/Button";
 import HeartIcon from "../../assets/icons/heart.svg";
 import HeartFullIcon from "../../assets/icons/heart_full.svg";
 
+interface PurchaseOptionsProps {
+  price: string;
+  description: string;
+  options: string[];
+  selected: string;
+  selectedQuantity: string;
+  productQuantity: string[];
+  isInWishlist: boolean;
+  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleWishlist: () => void;
+  handleClickCarts: () => void;
+  handleClickPayment: () => void;
+}
+
 export default function PurchaseOptions({
   price,
   description,
@@ -14,19 +28,7 @@ export default function PurchaseOptions({
   handleClickCarts,
   handleClickPayment,
   isInWishlist,
-}: {
-  price: string;
-  description: string;
-  options: string[];
-  selected: string;
-  selectedQuantity: string;
-  productQuantity: string[];
-  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleWishlist: () => void;
-  handleClickCarts: () => void;
-  handleClickPayment: () => void;
-  isInWishlist: boolean;
-}) {
+}: PurchaseOptionsProps) {
   return (
     <div>
       <div className="flex gap-[460px] text-lg text-left ml-[30px] mt-[25px]">
