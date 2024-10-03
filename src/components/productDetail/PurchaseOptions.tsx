@@ -7,6 +7,7 @@ export default function PurchaseOptions({
   description,
   options,
   selected,
+  selectedQuantity,
   productQuantity,
   handleSelect,
   handleWishlist,
@@ -18,6 +19,7 @@ export default function PurchaseOptions({
   description: string;
   options: string[];
   selected: string;
+  selectedQuantity: string;
   productQuantity: string[];
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleWishlist: () => void;
@@ -44,11 +46,14 @@ export default function PurchaseOptions({
           className="p-3 m-7 border-2 border-brand rounded-md outline-none bg-[#EEE]"
           id="select"
           onChange={handleSelect}
-          value={selected}
+          value={`${selected}, ${selectedQuantity}`}
         >
           {options &&
             options.map((option, index) => (
-              <option key={index} value={option}>
+              <option
+                key={index}
+                value={`${option}, ${productQuantity[index]}`}
+              >
                 {option} {`| 수량 ${productQuantity[index]}개 남음`}
               </option>
             ))}

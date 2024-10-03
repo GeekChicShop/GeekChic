@@ -27,8 +27,9 @@ export default function ProductsDtail() {
   const { product } = location.state as { product: ProductComments };
   const { description, image, price, options, productQuantity } = product;
 
+  const [selectedImage, setselectedImage] = useState<string>(image[0]);
   const [selected, setSelected] = useState<string>(options && options[0]);
-  const [selectedQuantity, setselectedQuantity] = useState<string>(
+  const [selectedQuantity, setSelectedQuantity] = useState<string>(
     productQuantity && productQuantity[0]
   );
   const [isLoading, setIsLoading] = useState(true);
@@ -45,8 +46,9 @@ export default function ProductsDtail() {
   }, [product]);
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelected(e.target.value);
-    setselectedQuantity(e.target.value);
+    const [option, quantity] = e.target.value.split(","); // ,를 기준으로 값 분리
+    setSelected(option.trim()); // 선택된 옵션
+    setSelectedQuantity(quantity.trim()); // 선택된 수량
   };
 
   const handleBack = () => {
@@ -113,6 +115,8 @@ export default function ProductsDtail() {
         <>
           <ImageCard
             image={image}
+            selectedImage={selectedImage}
+            setselectedImage={setselectedImage}
             description={description}
             handleBack={handleBack}
           />
@@ -121,6 +125,7 @@ export default function ProductsDtail() {
             description={description}
             options={options}
             selected={selected}
+            selectedQuantity={selectedQuantity}
             productQuantity={productQuantity}
             handleSelect={handleSelect}
             handleWishlist={handleWishlist}
