@@ -1,19 +1,10 @@
 import { atom } from "recoil";
 import { User } from "firebase/auth";
 import { UserDataType } from "../types/usedType";
+import { Product } from "../types/mainType";
 
 interface AdminUser extends User {
   isAdmin: boolean;
-}
-
-interface Product {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  price: string;
-  image: string;
-  options: string[];
 }
 
 export const userState = atom<AdminUser | null>({

@@ -13,7 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
       }}
       className="border rounded-md truncate cursor-pointer hover:hover:brightness-75 transition"
     >
-      <img className="w-[120px] h-[130px]" src={image} alt="img" />
+      <img className="w-[120px] h-[130px]" src={image[0]} alt="img" />
     </li>
   );
 }

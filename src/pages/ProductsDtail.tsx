@@ -25,9 +25,13 @@ export default function ProductsDtail() {
   const setWishlist = useSetRecoilState(wishlistState);
 
   const { product } = location.state as { product: ProductComments };
-  const { description, image, price, options } = product;
+  const { description, image, price, options, productQuantity } = product;
 
+  const [selectedImage, setselectedImage] = useState<string>(image[0]);
   const [selected, setSelected] = useState<string>(options && options[0]);
+  const [selectedQuantity, setSelectedQuantity] = useState<string>(
+    productQuantity && productQuantity[0]
+  );
   const [isLoading, setIsLoading] = useState(true);
   const isInWishlist = wishlist.some((item) => item.id === product.id);
   const id = user?.uid;
@@ -42,7 +46,9 @@ export default function ProductsDtail() {
   }, [product]);
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelected(e.target.value);
+    const [option, quantity] = e.target.value.split(","); // ,를 기준으로 값 분리
+    setSelected(option.trim()); // 선택된 옵션
+    setSelectedQuantity(quantity.trim()); // 선택된 수량
   };
 
   const handleBack = () => {
@@ -52,7 +58,12 @@ export default function ProductsDtail() {
   const handleClickPayment = async () => {
     if (user) {
       const selectedProduct = [
-        { ...product, options: [selected], quantity: 1 },
+        {
+          ...product,
+          options: [selected],
+          productQuantity: [selectedQuantity],
+          quantity: 1,
+        },
       ];
       navigate(`/payment/${id}`, {
         state: { payProduct: selectedProduct, user },
@@ -64,7 +75,12 @@ export default function ProductsDtail() {
   };
   const handleClickCarts = async () => {
     if (user) {
-      const selectedProduct = { ...product, options: selected, quantity: 1 };
+      const selectedProduct = {
+        ...product,
+        options: selected,
+        productQuantity: selectedQuantity,
+        quantity: 1,
+      };
       addOrUpdateToCart(id as string, selectedProduct);
       alert(`장바구니에 추가가 되었습니다!`);
     } else {
@@ -99,6 +115,8 @@ export default function ProductsDtail() {
         <>
           <ImageCard
             image={image}
+            selectedImage={selectedImage}
+            setselectedImage={setselectedImage}
             description={description}
             handleBack={handleBack}
           />
@@ -107,6 +125,8 @@ export default function ProductsDtail() {
             description={description}
             options={options}
             selected={selected}
+            selectedQuantity={selectedQuantity}
+            productQuantity={productQuantity}
             handleSelect={handleSelect}
             handleWishlist={handleWishlist}
             handleClickCarts={handleClickCarts}
