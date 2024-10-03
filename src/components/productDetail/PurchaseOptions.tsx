@@ -7,6 +7,7 @@ export default function PurchaseOptions({
   description,
   options,
   selected,
+  productQuantity,
   handleSelect,
   handleWishlist,
   handleClickCarts,
@@ -17,6 +18,7 @@ export default function PurchaseOptions({
   description: string;
   options: string[];
   selected: string;
+  productQuantity: string[];
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleWishlist: () => void;
   handleClickCarts: () => void;
@@ -47,7 +49,7 @@ export default function PurchaseOptions({
           {options &&
             options.map((option, index) => (
               <option key={index} value={option}>
-                {option}
+                {option} {`| 수량 ${productQuantity[index]}개 남음`}
               </option>
             ))}
         </select>

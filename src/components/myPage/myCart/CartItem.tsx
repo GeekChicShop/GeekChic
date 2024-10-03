@@ -33,7 +33,7 @@ export default function CartItem({
       <li className="flex mb-5 w-[550px]">
         <img
           className="w-[130px] h-[130px] rounded-[5px]"
-          src={image}
+          src={image[0]}
           alt={title}
         />
         <div className="flex text-left px-1 w-[380px]">

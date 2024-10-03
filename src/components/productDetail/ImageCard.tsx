@@ -5,7 +5,7 @@ export default function ImageCard({
   description,
   handleBack,
 }: {
-  image: string;
+  image: string[];
   description: string;
   handleBack: () => void;
 }) {
@@ -17,9 +17,9 @@ export default function ImageCard({
         className="w-10 h-10 cursor-pointer "
         onClick={handleBack}
       />
-      <img className="w-[598px] h-[550px]" src={image} alt={description} />
+      <img className="w-[598px] h-[550px]" src={image[0]} alt={description} />
       <div className="flex m-[30px] gap-[20px]">
-        {/* {image ? (
+        {image ? (
           image.map((img) => (
             <img className="w-[100px] h-[100px]" src={img} alt={description} />
           ))
@@ -28,9 +28,7 @@ export default function ImageCard({
             <div className="w-[100px] h-[100px] bg-lightgray"></div>
             <div className="w-[100px] h-[100px] bg-lightgray"></div>
           </>
-        )} */}
-        <div className="w-[100px] h-[100px] bg-lightgray"></div>
-        <div className="w-[100px] h-[100px] bg-lightgray"></div>
+        )}
       </div>
     </>
   );

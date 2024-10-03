@@ -5,7 +5,7 @@ export default function PaymentCard({ product }: { product: PayProduct }) {
   return (
     <li className="flex mb-4 ml-[40px] w-[550px]">
       <img
-        src={product.image}
+        src={product.image[0]}
         alt={product.title}
         className="w-[150px] h-[150px] rounded-[5px]"
       />

@@ -114,6 +114,8 @@ const searchProducts = async (keyword: string): Promise<Product[]> => {
       price: item.price,
       image: item.image,
       options: item.options,
+      productQuantity: item.productQuantity,
+      createdAt: item.createdAt,
     };
     products.push(product);
   });

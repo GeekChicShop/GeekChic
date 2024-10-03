@@ -25,9 +25,12 @@ export default function ProductsDtail() {
   const setWishlist = useSetRecoilState(wishlistState);
 
   const { product } = location.state as { product: ProductComments };
-  const { description, image, price, options } = product;
+  const { description, image, price, options, productQuantity } = product;
 
   const [selected, setSelected] = useState<string>(options && options[0]);
+  const [selectedQuantity, setselectedQuantity] = useState<string>(
+    productQuantity && productQuantity[0]
+  );
   const [isLoading, setIsLoading] = useState(true);
   const isInWishlist = wishlist.some((item) => item.id === product.id);
   const id = user?.uid;
@@ -43,6 +46,7 @@ export default function ProductsDtail() {
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value);
+    setselectedQuantity(e.target.value);
   };
 
   const handleBack = () => {
@@ -52,7 +56,12 @@ export default function ProductsDtail() {
   const handleClickPayment = async () => {
     if (user) {
       const selectedProduct = [
-        { ...product, options: [selected], quantity: 1 },
+        {
+          ...product,
+          options: [selected],
+          productQuantity: [selectedQuantity],
+          quantity: 1,
+        },
       ];
       navigate(`/payment/${id}`, {
         state: { payProduct: selectedProduct, user },
@@ -64,7 +73,12 @@ export default function ProductsDtail() {
   };
   const handleClickCarts = async () => {
     if (user) {
-      const selectedProduct = { ...product, options: selected, quantity: 1 };
+      const selectedProduct = {
+        ...product,
+        options: selected,
+        productQuantity: selectedQuantity,
+        quantity: 1,
+      };
       addOrUpdateToCart(id as string, selectedProduct);
       alert(`장바구니에 추가가 되었습니다!`);
     } else {
@@ -107,6 +121,7 @@ export default function ProductsDtail() {
             description={description}
             options={options}
             selected={selected}
+            productQuantity={productQuantity}
             handleSelect={handleSelect}
             handleWishlist={handleWishlist}
             handleClickCarts={handleClickCarts}
