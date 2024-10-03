@@ -4,8 +4,10 @@ export interface Product {
   category: string;
   description: string;
   price: string;
-  image: string;
+  image: string[];
   options: string[];
+  productQuantity: string[];
+  createdAt?: string;
 }
 
 export interface PayProduct extends Product {
@@ -25,6 +27,8 @@ export interface AddProduct {
   price: string;
   image: string;
   options: string;
+  productQuantity: string;
+  createdAt?: string;
 }
 
 export interface OrderProduct {
@@ -71,7 +75,9 @@ export interface CartProducts {
   category: string;
   description: string;
   price: string;
-  image: string;
+  image: string[];
   options: string;
   quantity: number;
+  productQuantity: string;
+  createdAt?: string;
 }

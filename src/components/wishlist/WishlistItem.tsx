@@ -29,7 +29,7 @@ export default function WishlistItem({
       >
         <img
           className="w-[150px] h-[150px] rounded-[5px]"
-          src={product.image}
+          src={product.image[0]}
           alt={product.title}
         />
         <div className="text-left px-4 w-[380px]">

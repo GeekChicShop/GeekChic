@@ -2,27 +2,33 @@ import Button from "../../components/ui/Button";
 import HeartIcon from "../../assets/icons/heart.svg";
 import HeartFullIcon from "../../assets/icons/heart_full.svg";
 
+interface PurchaseOptionsProps {
+  price: string;
+  description: string;
+  options: string[];
+  selected: string;
+  selectedQuantity: string;
+  productQuantity: string[];
+  isInWishlist: boolean;
+  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleWishlist: () => void;
+  handleClickCarts: () => void;
+  handleClickPayment: () => void;
+}
+
 export default function PurchaseOptions({
   price,
   description,
   options,
   selected,
+  selectedQuantity,
+  productQuantity,
   handleSelect,
   handleWishlist,
   handleClickCarts,
   handleClickPayment,
   isInWishlist,
-}: {
-  price: string;
-  description: string;
-  options: string[];
-  selected: string;
-  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleWishlist: () => void;
-  handleClickCarts: () => void;
-  handleClickPayment: () => void;
-  isInWishlist: boolean;
-}) {
+}: PurchaseOptionsProps) {
   return (
     <div>
       <div className="flex gap-[460px] text-lg text-left ml-[30px] mt-[25px]">
@@ -42,12 +48,15 @@ export default function PurchaseOptions({
           className="p-3 m-7 border-2 border-brand rounded-md outline-none bg-[#EEE]"
           id="select"
           onChange={handleSelect}
-          value={selected}
+          value={`${selected}, ${selectedQuantity}`}
         >
           {options &&
             options.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
+              <option
+                key={index}
+                value={`${option}, ${productQuantity[index]}`}
+              >
+                {option} {`| 수량 ${productQuantity[index]}개 남음`}
               </option>
             ))}
         </select>

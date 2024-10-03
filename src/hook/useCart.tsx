@@ -27,6 +27,7 @@ export default function useCart(userId: string) {
       });
     },
   });
+
   const removeItem = useMutation<void, Error, CartRemoveVariables>({
     mutationFn: ({ id }) => removeFromCart(userId, id),
 

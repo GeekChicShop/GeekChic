@@ -114,6 +114,8 @@ const searchProducts = async (keyword: string): Promise<Product[]> => {
       price: item.price,
       image: item.image,
       options: item.options,
+      productQuantity: item.productQuantity,
+      createdAt: item.createdAt,
     };
     products.push(product);
   });
@@ -153,6 +155,8 @@ export async function addNewProduct(
     id,
     price: product.price,
     image,
+    createdAt: new Date().toISOString(),
+    productQuantity: product.productQuantity.split(","),
     options: product.options.split(","),
   });
 }
@@ -220,7 +224,7 @@ export async function getCommentItems(productId: string): Promise<Comment[]> {
             ? Date.parse(b.createdAt)
             : b.createdAt;
 
-        // createdAt이 숫자라면 오름차순으로 정렬
+        // createdAt이 숫자라면 최신순으로 정렬
         return dateB - dateA;
       });
     }
