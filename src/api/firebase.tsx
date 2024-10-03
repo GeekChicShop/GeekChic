@@ -153,6 +153,8 @@ export async function addNewProduct(
     id,
     price: product.price,
     image,
+    createdAt: new Date().toISOString(),
+    productQuantity: product.productQuantity.split(","),
     options: product.options.split(","),
   });
 }

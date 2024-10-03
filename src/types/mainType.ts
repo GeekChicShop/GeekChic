@@ -25,6 +25,8 @@ export interface AddProduct {
   price: string;
   image: string;
   options: string;
+  productQuantity: string;
+  createdAt?: string;
 }
 
 export interface OrderProduct {

@@ -1,4 +1,3 @@
-import React from "react";
 import { PayProduct } from "../../types/mainType";
 
 export default function PaymentCard({ product }: { product: PayProduct }) {

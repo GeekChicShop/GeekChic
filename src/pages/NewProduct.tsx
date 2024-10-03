@@ -147,9 +147,17 @@ export default function NewProduct() {
         />
         <input
           type="text"
-          placeholder="옵션들(콤마(,)로 구분"
+          placeholder="옵션들 콤마(,)로 구분"
           name="options"
           value={product.options ?? ""}
+          required
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="수량들 콤마(,)로 구분"
+          name="productQuantity"
+          value={product.productQuantity ?? ""}
           required
           onChange={handleChange}
         />
