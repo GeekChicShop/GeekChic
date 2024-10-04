@@ -1,8 +1,15 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-import { addOrderList, removeFromCart } from "../api/firebase";
-import { PayProduct, OrderDetails } from "../types/mainType";
+import {
+  addOrderList,
+  removeFromCart,
+  updateProductQuantity,
+  getProductDetail,
+} from "../api/firebase";
+
+import { PayProduct, OrderDetails, Product } from "../types/mainType";
 import PaymentCard from "../components/payment/PaymentCard";
 import Button from "../components/ui/Button";
 
@@ -32,6 +39,12 @@ export default function Payment() {
       0
     );
 
+  const { data: product } = useQuery<Product, Error>({
+    queryKey: ["product", productIds],
+    queryFn: () => getProductDetail(productIds),
+    enabled: !!productIds, // 조건을 통해 쿼리 실행 여부를 제어
+  });
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -54,7 +67,20 @@ export default function Payment() {
     try {
       await addOrderList(userId, payProduct, orderDetails);
       alert("주문이 성공적으로 완료되었습니다.");
+
       for (const productId of productIds) {
+        const updatedQuantity = payProduct.map((product) => {
+          return String(parseInt(product.productQuantity) - product.quantity);
+        });
+
+        const index = payProduct.map((payproduct) => {
+          return product?.options.findIndex(
+            (opt) => payproduct.options[0] === opt
+          );
+        });
+
+        await updateProductQuantity(productId, updatedQuantity, index);
+
         await removeFromCart(userId, productId);
       }
       navigate(`/my/${userId}`);
@@ -62,6 +88,7 @@ export default function Payment() {
       alert("주문 실패");
     }
   };
+
   return (
     <div className="container w-[600px]">
       <div className="flex justify-center mt-[80px] mb-[10px]">

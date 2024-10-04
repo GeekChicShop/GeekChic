@@ -41,7 +41,9 @@ export default function CartItem({
             <p>{title}</p>
             <p className="mt-[5px] font-bold">{description}</p>
             <p className="text-sizegray">{options}</p>
-            <p className="mt-[25px] text-xl text-nowrap font-bold">{price}원</p>
+            <p className="mt-[25px] text-xl text-nowrap font-bold">
+              {parseInt(price) * quantity}원
+            </p>
           </div>
           <div className="flex items-center">
             <img
