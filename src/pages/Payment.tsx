@@ -86,45 +86,9 @@ export default function Payment() {
       navigate(`/my/${userId}`);
     } catch (error) {
       alert("주문 실패");
-      //   await addOrderList(userId, payProduct, orderDetails);
-      //   alert("주문이 성공적으로 완료되었습니다.");
-
-      //   for (const productId of productIds) {
-      //     // 각 payProduct의 수량을 업데이트하기 위한 새로운 배열
-      //     const updatedQuantities = payProduct.map((product: PayProduct) => {
-      //       const index = product.options.indexOf(productId); // 인덱스를 직접 찾음
-
-      //       if (index !== -1) {
-      //         // 인덱스가 유효하면 수량 업데이트
-      //         return String(
-      //           parseInt(product.productQuantity[index]) - product.quantity
-      //         );
-      //       }
-
-      //       return product.productQuantity[index]; // 인덱스가 없을 경우 원래 수량 유지
-      //     });
-
-      //     // 각 제품에 대한 인덱스 찾기
-      //     const indices = payProduct.map(
-      //       (product: PayProduct) => product.options.indexOf(productId) // payProduct의 옵션에서 인덱스를 찾음
-      //     );
-
-      //     // 제품 수량 업데이트
-      //     await updateProductQuantity(productId, updatedQuantities, indices);
-
-      //     // 장바구니에서 제거
-      //     await removeFromCart(userId, productId);
-      //   }
-      //   navigate(`/my/${userId}`);
-      // } catch (error) {
-      //   alert("주문 실패");
     }
   };
-  // const index = payProduct.map((payproduct) => {
-  //   return product?.options.findIndex((opt) => payproduct.options[0] === opt);
-  // });
 
-  // console.log(index);
   return (
     <div className="container w-[600px]">
       <div className="flex justify-center mt-[80px] mb-[10px]">

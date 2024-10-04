@@ -181,7 +181,7 @@ export async function updateProductQuantity(
   if (snapshot.exists()) {
     const productData = snapshot.val();
     const productQuantity = productData.productQuantity as string[];
-    console.dir(index, updatedQuantities);
+
     // 각 인덱스에 맞는 수량 업데이트
     index.forEach((index, i) => {
       if (index !== undefined && index >= 0) {
