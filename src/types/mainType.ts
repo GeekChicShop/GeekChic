@@ -10,7 +10,7 @@ export interface Product {
   createdAt?: string;
 }
 
-export interface PayProduct extends Product {
+export interface PayProduct extends AddProduct {
   id: string;
   quantity: number;
 }

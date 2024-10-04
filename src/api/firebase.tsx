@@ -161,6 +161,40 @@ export async function addNewProduct(
   });
 }
 
+export async function getProductDetail(productIds: string[]): Promise<Product> {
+  const productRef = ref(getDatabase(), `products/${productIds}`);
+  const snapshot = await get(productRef);
+  if (snapshot.exists()) {
+    return snapshot.val();
+  }
+  throw new Error("Product not found");
+}
+
+export async function updateProductQuantity(
+  productId: string,
+  updatedQuantities: string[],
+  index: (number | undefined)[]
+) {
+  const productRef = ref(getDatabase(), `products/${productId}`);
+  const snapshot = await get(productRef);
+
+  if (snapshot.exists()) {
+    const productData = snapshot.val();
+    const productQuantity = productData.productQuantity as string[];
+    console.dir(index, updatedQuantities);
+    // 각 인덱스에 맞는 수량 업데이트
+    index.forEach((index, i) => {
+      if (index !== undefined && index >= 0) {
+        productQuantity[index] = updatedQuantities[i]; // 인덱스에 맞는 수량 업데이트
+      }
+    });
+
+    await update(productRef, { productQuantity });
+  } else {
+    throw new Error("Product not found");
+  }
+}
+
 export async function addWishlistItem(
   userId: string,
   product: Product
