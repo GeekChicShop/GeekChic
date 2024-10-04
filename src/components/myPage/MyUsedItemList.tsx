@@ -12,7 +12,7 @@ const MyUsedItemList = ({ item, isCart }: UsedItemListType) => {
     <div className={isCart ? "border-b mb-10" : ""}>
       <div key={item.id} className="flex mb-4">
         <img
-          src={item.image}
+          src={item.image[0]}
           alt={item.title}
           className="w-20 h-20 object-cover rounded-lg mr-4"
         />
@@ -23,7 +23,9 @@ const MyUsedItemList = ({ item, isCart }: UsedItemListType) => {
             <p className="text-sm text-gray-500">
               {item.options[0]} | {item.quantity}개
             </p>
-            <p className="font-bold text-lg">{item.price}원 </p>
+            <p className="font-bold text-lg">
+              {Number(item.price) * item.quantity}원
+            </p>
           </div>
         </div>
       </div>
