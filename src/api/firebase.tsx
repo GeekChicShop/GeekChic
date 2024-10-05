@@ -149,13 +149,17 @@ export async function addNewProduct(
 ): Promise<void> {
   const id = uuidv4();
   const definedId = id.replace(/[.#$[\]]/g, "_");
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+  const koreaTimeDiff = 9 * 60 * 60 * 1000;
+  const korNow = new Date(utc + koreaTimeDiff);
 
   await set(ref(database, `products/${definedId}`), {
     ...product,
     id,
     price: product.price,
     image,
-    createdAt: new Date().toISOString(),
+    createdAt: korNow.toISOString(),
     productQuantity: product.productQuantity.split(","),
     options: product.options.split(","),
   });
@@ -229,6 +233,7 @@ export async function newComment(
   const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
   const koreaTimeDiff = 9 * 60 * 60 * 1000;
   const korNow = new Date(utc + koreaTimeDiff);
+
   const newComment: Comment = {
     id: commentId,
     text: comments.text,
@@ -298,8 +303,12 @@ export async function addOrderList(
   orderDetails: OrderDetails
 ): Promise<void> {
   const ordersId = uuidv4();
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+  const koreaTimeDiff = 9 * 60 * 60 * 1000;
+  const korNow = new Date(utc + koreaTimeDiff);
+
   const orderRef = ref(database, `userData/${userId}/orders/${ordersId}`);
-  // const newOrderRef = push(orderRef);
   const items = product.map((product) => ({
     description: product.description,
     image: product.image,
@@ -316,7 +325,7 @@ export async function addOrderList(
     phone: orderDetails.phone,
     address: orderDetails.address,
     paymentMethod: orderDetails.paymentMethod,
-    createdAt: new Date().toISOString(),
+    createdAt: korNow.toISOString(),
   };
 
   return set(orderRef, orderData);
