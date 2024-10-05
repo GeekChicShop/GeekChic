@@ -136,8 +136,25 @@ export function useProducts() {
 
 export async function getProducts(): Promise<Product[]> {
   return get(ref(database, "products")).then((snapshot) => {
+    // if (snapshot.exists()) {
+    //   return Object.values(snapshot.val());
+    // }
     if (snapshot.exists()) {
-      return Object.values(snapshot.val());
+      const products: Product[] = Object.values(snapshot.val());
+      // createdAt을 숫자 타입으로 변환하여 정렬
+      return products.sort((a, b) => {
+        const dateA =
+          typeof a.createdAt === "string"
+            ? Date.parse(a.createdAt)
+            : a.createdAt ?? Date.now();
+        const dateB =
+          typeof b.createdAt === "string"
+            ? Date.parse(b.createdAt)
+            : b.createdAt ?? Date.now();
+
+        // createdAt이 숫자라면 최신순으로 정렬
+        return dateB - dateA;
+      });
     }
     return [];
   });
