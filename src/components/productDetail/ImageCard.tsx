@@ -4,6 +4,7 @@ interface ImageProps {
   image: string[];
   selectedImage: string;
   description: string;
+  quantityCount: string;
   setselectedImage: (img: string) => void; // 정확한 타입을 지정
   handleBack: () => void;
 }
@@ -13,6 +14,7 @@ export default function ImageCard({
   selectedImage,
   setselectedImage,
   description,
+  quantityCount,
   handleBack,
 }: ImageProps) {
   return (
@@ -24,7 +26,9 @@ export default function ImageCard({
         onClick={handleBack}
       />
       <img
-        className="w-[598px] h-[550px]"
+        className={`w-[598px] h-[550px] ${
+          Number(quantityCount) <= 0 && "opacity-50"
+        }`}
         src={selectedImage}
         alt={description}
       />

@@ -63,16 +63,22 @@ export default function PurchaseOptions({
       </div>
       <p className="border border-[#D9D9D9] w-[550px] m-auto"></p>
       <div className="flex justify-center gap-[50px] mt-[30px]">
-        <Button
-          text="장바구니 담기"
-          onClick={handleClickCarts}
-          className="w-[250px] bg-red text-white border border-red hover:bg-white hover:text-red"
-        />
-        <Button
-          text="바로구매"
-          onClick={handleClickPayment}
-          className="w-[250px] bg-puple text-white border border-puple hover:bg-white hover:text-puple"
-        />
+        {Number(selectedQuantity) === 0 ? (
+          <div className="text-xl font-bold">품절 입니다.</div>
+        ) : (
+          <>
+            <Button
+              text="장바구니 담기"
+              onClick={handleClickCarts}
+              className="w-[250px] bg-red text-white border border-red hover:bg-white hover:text-red"
+            />
+            <Button
+              text="바로구매"
+              onClick={handleClickPayment}
+              className="w-[250px] bg-puple text-white border border-puple hover:bg-white hover:text-puple"
+            />
+          </>
+        )}
       </div>
     </div>
   );
