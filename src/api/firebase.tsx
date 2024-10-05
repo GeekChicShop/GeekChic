@@ -136,8 +136,25 @@ export function useProducts() {
 
 export async function getProducts(): Promise<Product[]> {
   return get(ref(database, "products")).then((snapshot) => {
+    // if (snapshot.exists()) {
+    //   return Object.values(snapshot.val());
+    // }
     if (snapshot.exists()) {
-      return Object.values(snapshot.val());
+      const products: Product[] = Object.values(snapshot.val());
+      // createdAt을 숫자 타입으로 변환하여 정렬
+      return products.sort((a, b) => {
+        const dateA =
+          typeof a.createdAt === "string"
+            ? Date.parse(a.createdAt)
+            : a.createdAt ?? Date.now();
+        const dateB =
+          typeof b.createdAt === "string"
+            ? Date.parse(b.createdAt)
+            : b.createdAt ?? Date.now();
+
+        // createdAt이 숫자라면 최신순으로 정렬
+        return dateB - dateA;
+      });
     }
     return [];
   });
@@ -149,13 +166,17 @@ export async function addNewProduct(
 ): Promise<void> {
   const id = uuidv4();
   const definedId = id.replace(/[.#$[\]]/g, "_");
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+  const koreaTimeDiff = 9 * 60 * 60 * 1000;
+  const korNow = new Date(utc + koreaTimeDiff);
 
   await set(ref(database, `products/${definedId}`), {
     ...product,
     id,
     price: product.price,
     image,
-    createdAt: new Date().toISOString(),
+    createdAt: korNow.toISOString(),
     productQuantity: product.productQuantity.split(","),
     options: product.options.split(","),
   });
@@ -225,11 +246,16 @@ export async function newComment(
   comments: Omit<Comment, "id" | "createdAt">
 ): Promise<void> {
   const commentId = uuidv4();
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+  const koreaTimeDiff = 9 * 60 * 60 * 1000;
+  const korNow = new Date(utc + koreaTimeDiff);
+
   const newComment: Comment = {
     id: commentId,
     text: comments.text,
     rank: comments.rank,
-    createdAt: new Date().toISOString(),
+    createdAt: korNow.toISOString(),
     uid: comments.uid,
     userPhoto: comments.userPhoto,
     displayName: comments.displayName,
@@ -294,8 +320,12 @@ export async function addOrderList(
   orderDetails: OrderDetails
 ): Promise<void> {
   const ordersId = uuidv4();
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+  const koreaTimeDiff = 9 * 60 * 60 * 1000;
+  const korNow = new Date(utc + koreaTimeDiff);
+
   const orderRef = ref(database, `userData/${userId}/orders/${ordersId}`);
-  // const newOrderRef = push(orderRef);
   const items = product.map((product) => ({
     description: product.description,
     image: product.image,
@@ -312,7 +342,7 @@ export async function addOrderList(
     phone: orderDetails.phone,
     address: orderDetails.address,
     paymentMethod: orderDetails.paymentMethod,
-    createdAt: new Date().toISOString(),
+    createdAt: korNow.toISOString(),
   };
 
   return set(orderRef, orderData);
@@ -326,6 +356,7 @@ export async function getOrderItems(
     if (snapshot.exists()) {
       return Object.values(snapshot.val());
     }
+
     return [];
   });
 }

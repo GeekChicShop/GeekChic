@@ -35,6 +35,9 @@ export default function ProductsDtail() {
   const [isLoading, setIsLoading] = useState(true);
   const isInWishlist = wishlist.some((item) => item.id === product.id);
   const id = user?.uid;
+  const quantityCount = productQuantity.reduce((quantity, cur) => {
+    return String(Number(quantity) + Number(cur));
+  });
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -119,6 +122,7 @@ export default function ProductsDtail() {
             setselectedImage={setselectedImage}
             description={description}
             handleBack={handleBack}
+            quantityCount={quantityCount}
           />
           <PurchaseOptions
             price={price}
