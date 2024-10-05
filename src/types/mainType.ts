@@ -46,7 +46,7 @@ export interface GetOrderDetails {
   phone: string;
   address: string;
   paymentMethod: string;
-  createdAt?: string;
+  createdAt: string;
   items: OrderProduct[];
 }
 

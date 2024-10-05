@@ -225,11 +225,15 @@ export async function newComment(
   comments: Omit<Comment, "id" | "createdAt">
 ): Promise<void> {
   const commentId = uuidv4();
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+  const koreaTimeDiff = 9 * 60 * 60 * 1000;
+  const korNow = new Date(utc + koreaTimeDiff);
   const newComment: Comment = {
     id: commentId,
     text: comments.text,
     rank: comments.rank,
-    createdAt: new Date().toISOString(),
+    createdAt: korNow.toISOString(),
     uid: comments.uid,
     userPhoto: comments.userPhoto,
     displayName: comments.displayName,
@@ -326,6 +330,7 @@ export async function getOrderItems(
     if (snapshot.exists()) {
       return Object.values(snapshot.val());
     }
+
     return [];
   });
 }
