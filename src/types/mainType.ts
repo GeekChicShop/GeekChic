@@ -31,6 +31,18 @@ export interface AddProduct {
   createdAt?: string;
 }
 
+export interface testAddProduct {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  price: string;
+  image: string;
+  options: string[];
+  productQuantity: string;
+  createdAt?: string;
+}
+
 export interface OrderProduct {
   title: string;
   description: string;
