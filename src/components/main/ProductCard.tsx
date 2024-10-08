@@ -29,14 +29,14 @@ export default function ProductCard({ product }: { product: Product }) {
   });
 
   return (
-    <div className="relative">
+    <div className="relative hover:hover:brightness-75">
       <li
         onClick={() => {
           navigate(`/products/detail/${id}`, {
             state: { product },
           });
         }}
-        className={`border rounded-md truncate cursor-pointer hover:hover:brightness-75 transition ${
+        className={`border rounded-md truncate cursor-pointer  transition ${
           Number(quantityCount) <= 0 && "opacity-50"
         }`}
       >
