@@ -39,7 +39,7 @@ export default function Payment() {
       0
     );
 
-  const { data: product } = useQuery<Product, Error>({
+  const { data: products } = useQuery<Product, Error>({
     queryKey: ["product", productIds],
     queryFn: () => getProductDetail(productIds),
     enabled: !!productIds, // 조건을 통해 쿼리 실행 여부를 제어
@@ -74,7 +74,7 @@ export default function Payment() {
         });
 
         const index = payProduct.map((payproduct) => {
-          return product?.options.findIndex(
+          return products?.options.findIndex(
             (opt) => payproduct.options[0] === opt
           );
         });
@@ -83,6 +83,43 @@ export default function Payment() {
 
         await removeFromCart(userId, productId);
       }
+      // for (const product of payProduct) {
+      //   const productId = product.id; // 해당 제품의 ID
+
+      //   const updatedQuantity = String(
+      //     parseInt(product.productQuantity[0]) - product.quantity
+      //   );
+
+      //   const index = products?.options.findIndex(
+      //     (opt) => opt === product.options[0]
+      //   );
+
+      //   await updateProductQuantity(productId, updatedQuantity, [index]);
+
+      //   await removeFromCart(userId, productId);
+      // }
+      // for (const product of payProduct) {
+      //   const productId = product.id; // 제품 ID
+      //   const selectedOption = product.options[0]; // 선택된 옵션 (예: S, M, L, XL)
+
+      //   // 해당 제품의 옵션과 일치하는 인덱스 찾기
+      //   const index = products?.options.findIndex(
+      //     (opt) => opt === selectedOption
+      //   );
+
+      //   if (index !== undefined && index >= 0) {
+      //     // 해당 인덱스의 수량 업데이트 (현재 수량 - 주문한 수량)
+      //     const updatedQuantity = String(
+      //       parseInt(product.productQuantity[index]) - product.quantity
+      //     );
+
+      //     // Firebase 데이터베이스에서 수량 업데이트
+      //     await updateProductQuantity(productId, updatedQuantity, [index]);
+
+      //     // 장바구니에서 해당 제품 제거
+      //     await removeFromCart(userId, productId);
+      //   }
+      // }
       navigate(`/my/${userId}`);
     } catch (error) {
       alert("주문 실패");
